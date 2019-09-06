@@ -1,5 +1,10 @@
 #! /bin/bash/python3
 
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+
 #ultimate goal is to have a list of players with
 #a high probability of being drafted that will 
 #produce the most
