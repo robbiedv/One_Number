@@ -7,22 +7,37 @@ from bs4 import BeautifulSoup
 #a high probability of being drafted that will 
 #produce the most
 
-### Data that needs scraped ###
+#url path, request and parser
 
 url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
-
 response = requests.get(url)
 content = BeautifulSoup(response.content, "html.parser")
 
-player_stats = [ ]
+### Data that needs scraped ###
 
-stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
+#Skaters
+#g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
+
+skater_stats = []
+
+stats_to_scrape = ["pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
+
+#create a dictionary of each player whose value is a list of their stats
+
+players = { }
+
+for player in content.find_all("td", {"data-stat": "player"}): 
+	players.update({player.text: []})
+
+#append values with players stats
+
 
 for x in stats_to_scrape:
 	for data_stat in content.find_all("td", {"data-stat": x}):
-		player_stats.append(data_stat.text)
+		skater_stats.append(data_stat.text)
+		break
 
-print(player_stats)
+print(players)
 
 # 1 year stats
 
@@ -33,9 +48,6 @@ print(player_stats)
 # 4 year stats
 
 # 5 year stats
-
-#Skaters
-#g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
 
 
 #Goalies
