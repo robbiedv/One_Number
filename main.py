@@ -9,14 +9,6 @@ from bs4 import BeautifulSoup
 
 ### Data that needs scraped ###
 
-#skater_stats = 'http://www.nhl.com/stats/player?aggregate=1&reportType=season&seasonFrom=20142015&seasonTo=20182019&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists'
-#response = requests.get(skater_stats)
-#content = BeautifulSoup(response.content, "html.parser")
-
-#test = content.find_all(attrs={"class": "rt-header-cell"})
-
-#print(test.get_text())
-
 url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
 
 response = requests.get(url)
@@ -27,13 +19,8 @@ player_stats = [ ]
 stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
 
 for x in stats_to_scrape:
-	stat = content.find("td", {"data-stat": x})
-	player_stats.append(stat.text)
-
-
-def name():
-	stat = content.find("td", {"data-stat": "player"})
-	player_stats.append(stat.text)
+	for data_stat in content.find_all("td", {"data-stat": x}):
+		player_stats.append(data_stat.text)
 
 print(player_stats)
 
