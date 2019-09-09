@@ -18,27 +18,6 @@ content = BeautifulSoup(response.content, "html.parser")
 #Skaters
 #g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
 
-skater_stats = []
-
-stats_to_scrape = ["pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
-
-#create a dictionary of each player whose value is a list of their stats
-
-players = { }
-
-for player in content.find_all("td", {"data-stat": "player"}): 
-	players.update({player.text: []})
-
-#append values with players stats
-
-
-for x in stats_to_scrape:
-	for data_stat in content.find_all("td", {"data-stat": x}):
-		skater_stats.append(data_stat.text)
-		break
-
-print(players)
-
 # 1 year stats
 
 # 2 year stats
@@ -48,6 +27,43 @@ print(players)
 # 4 year stats
 
 # 5 year stats
+
+skater_stats = []
+
+stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
+
+### EXAMPLE START ###
+#
+# skaters_master_lsit = {"skaters : [
+#  {Patrick Kane : [
+# 	{ goals : 
+#	  assist :
+#	  ppg :
+#		}
+#	 ]
+#  }
+#
+#  {Brandon Saad : [
+#	{ goasl: 
+#         assist :
+#	  ppg :
+#		}
+#	 ]
+#  }]
+# }
+#
+### EXAMPLE END ###
+
+#create a dictionary with skaters as key and an empty list for value
+
+def master_list():
+	skaters_master_list = {"skaters":[]}
+	#for loop scraping player names
+	for skater_name in content.find_all("td", {"data-stat": "player"}):
+		#add player name to skater value list as new dictionary 
+		skaters_master_list["skaters"] = {skater_name.text:[]}
+
+print(master_list())
 
 
 #Goalies
