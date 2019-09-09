@@ -44,7 +44,7 @@ stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points"
 #  }
 #
 #  {Brandon Saad : [
-#	{ goasl: 
+#	{ goals: 
 #         assist :
 #	  ppg :
 #		}
@@ -55,15 +55,34 @@ stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points"
 ### EXAMPLE END ###
 
 #create a dictionary with skaters as key and an empty list for value
-
-def master_list():
-	skaters_master_list = {"skaters":[]}
-	#for loop scraping player names
+skaters_master = {"skaters":[]}
+	
+def add_skaters():
+	#for loop scraping skater names
 	for skater_name in content.find_all("td", {"data-stat": "player"}):
 		#add player name to skater value list as new dictionary 
-		skaters_master_list["skaters"] = {skater_name.text:[]}
+		skater_access = skaters_master["skaters"]
+		skater_access.append({skater_name.text: []})
 
-print(master_list())
+def add_stat_categories():
+	#for loop scraping stat cetegories
+	skater_access = skaters_master["skaters"]
+	stat_category_acesss = skater_access[]
+	for stat in stat_category_access:
+		
+
+
+
+#create a new dictionay associated with each skater name
+
+	
+#for loop scraping skater stats
+	#for skater_stats in content.find_all("td", {"data-stat": "goals"}):
+		 
+		#skater_access = skaters_master_list["skaters"]
+		#skater_access.append(skater_name.text)
+
+print(skaters_master)
 
 
 #Goalies
