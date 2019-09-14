@@ -17,7 +17,29 @@ content = BeautifulSoup(response.content, "html.parser")
 
 #Skaters
 #g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
+stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
 
+skaters = []
+
+#player = content.find("td", {"data-stat": "player"})
+#skater.append({player.text:[{"stats":[]}]})
+
+#stat1 = content.find("td", {"data-stat": "pos"})
+#stat_access = skater["Justin Abdelkader"]["stats"]
+#stat_access.append(stat1.text)
+
+#stat2 = content.find("td", {"data-stat": "games_played"})
+#stat_access = skater["stats"]
+#stat_access.append(stat2.text)
+
+#for x in stats_to_scrape:
+#	for stats in content.find_all("td", {"data-stat": x}):
+#		skaters.append([stats.text])
+
+
+for stats in content.find_all("td", {"data-stat": stats_to_scrape}):
+	print(stats.text)
+				
 # 1 year stats
 
 # 2 year stats
@@ -28,61 +50,14 @@ content = BeautifulSoup(response.content, "html.parser")
 
 # 5 year stats
 
-skater_stats = []
-
-stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
-
-### EXAMPLE START ###
-#
-# skaters_master_lsit = {"skaters : [
-#  {Patrick Kane : [
-# 	{ goals : 
-#	  assist :
-#	  ppg :
-#		}
-#	 ]
-#  }
-#
-#  {Brandon Saad : [
-#	{ goals: 
-#         assist :
-#	  ppg :
-#		}
-#	 ]
-#  }]
-# }
-#
-### EXAMPLE END ###
-
 #create a dictionary with skaters as key and an empty list for value
-skaters_master = {"skaters":[]}
+
 	
-def add_skaters():
-	#for loop scraping skater names
-	for skater_name in content.find_all("td", {"data-stat": "player"}):
-		#add player name to skater value list as new dictionary 
-		skater_access = skaters_master["skaters"]
-		skater_access.append({skater_name.text: []})
-
-def add_stat_categories():
-	#for loop scraping stat cetegories
-	skater_access = skaters_master["skaters"]
-	stat_category_acesss = skater_access[]
-	for stat in stat_category_access:
-		
-
+#scrape skater names and append to skaters list
 
 
 #create a new dictionay associated with each skater name
 
-	
-#for loop scraping skater stats
-	#for skater_stats in content.find_all("td", {"data-stat": "goals"}):
-		 
-		#skater_access = skaters_master_list["skaters"]
-		#skater_access.append(skater_name.text)
-
-print(skaters_master)
 
 
 #Goalies
