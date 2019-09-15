@@ -19,26 +19,19 @@ content = BeautifulSoup(response.content, "html.parser")
 #g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
 stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
 
+
 skaters = []
-
-#player = content.find("td", {"data-stat": "player"})
-#skater.append({player.text:[{"stats":[]}]})
-
-#stat1 = content.find("td", {"data-stat": "pos"})
-#stat_access = skater["Justin Abdelkader"]["stats"]
-#stat_access.append(stat1.text)
-
-#stat2 = content.find("td", {"data-stat": "games_played"})
-#stat_access = skater["stats"]
-#stat_access.append(stat2.text)
-
-#for x in stats_to_scrape:
-#	for stats in content.find_all("td", {"data-stat": x}):
-#		skaters.append([stats.text])
 
 
 for stats in content.find_all("td", {"data-stat": stats_to_scrape}):
-	print(stats.text)
+	skaters.append(stats.text)
+
+for x in skaters:
+	if len(x) > 4:
+		print('\n', x , end="")
+	else: print(x, end=" ")
+		
+
 				
 # 1 year stats
 
