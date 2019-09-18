@@ -7,54 +7,62 @@ from bs4 import BeautifulSoup
 #a high probability of being drafted that will 
 #produce the most
 
-#url path, request and parser
+### Skaters ###
 
-url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
-response = requests.get(url)
-content = BeautifulSoup(response.content, "html.parser")
+def skaters ():
 
-### Data that needs scraped ###
+	#url path, request and parser
 
-#Skaters
-#g, a, p, pim, ppg, ppa, ppp, sog, fw, hit, blk
-stats_to_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", "faceoff_wins", "hits"]
+	skater_url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
+	response = requests.get(skater_url)
+	content = BeautifulSoup(response.content, "html.parser")
 
+	#player, pos, gp, g, a, pim, ppg, ppa, sog, blk, hit, fw
 
-skaters = []
-
-
-for stats in content.find_all("td", {"data-stat": stats_to_scrape}):
-	skaters.append(stats.text)
-
-for x in skaters:
-	if len(x) > 4:
-		print('\n', x , end="")
-	else: print(x, end=" ")
-		
-
-				
-# 1 year stats
-
-# 2 year stats
-
-# 3 year stats
-
-# 4 year stats
-
-# 5 year stats
-
-#create a dictionary with skaters as key and an empty list for value
-
-	
-#scrape skater names and append to skaters list
+	skater_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
 
-#create a new dictionay associated with each skater name
+	skaters = []
+
+
+	for stats in content.find_all("td", {"data-stat": skater_scrape}):
+		skaters.append(stats.text)
+
+	for x in skaters:
+		if len(x) > 4:
+			print('\n', x , end="	")
+		else: print(x, end="	")
 
 
 
-#Goalies
-#w, sv, sa, sv%, sho
+### Goalies ###
+
+def goalies():
+
+	#url path, request and parser
+
+	goalie_url = "https://www.hockey-reference.com/leagues/NHL_2019_goalies.html"
+	response = requests.get(goalie_url)
+	content = BeautifulSoup(response.content, "html.parser")
+
+	#player, gp, w, sv, sa, sv%, sho
+
+	goalie_scrape = ["player", "games_goalie", "wins_goalie", "saves", "shots_against", "save_pct", "shutouts"]
+
+
+	goalies = []
+
+
+	for stats in content.find_all("td", {"data-stat": goalie_scrape}):
+		goalies.append(stats.text)
+
+	for x in goalies:
+		if len(x) > 4:
+			print('\n', x , end="	")
+		else: print(x, end="	")
+
+print(goalies())
+
 
 ### Data that needs ranked and scored individually ###
 
