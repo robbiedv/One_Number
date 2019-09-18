@@ -13,26 +13,27 @@ def skaters ():
 
 	#url path, request and parser
 
-	skater_url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
-	response = requests.get(skater_url)
+	url = "https://www.hockey-reference.com/leagues/NHL_2019_skaters.html"
+	response = requests.get(url)
 	content = BeautifulSoup(response.content, "html.parser")
 
 	#player, pos, gp, g, a, pim, ppg, ppa, sog, blk, hit, fw
 
-	skater_scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
+	scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
 
-	skaters = []
+	data = []
 
-
-	for stats in content.find_all("td", {"data-stat": skater_scrape}):
-		skaters.append(stats.text)
-
-	for x in skaters:
+	#loops over scrape list and appends all data to the players list
+	for stats in content.find_all("td", {"data-stat": scrape}):
+		data.append(stats.text)
+	#loops over all data in players list and formats for importing into SQL table
+	for x in data:
 		if len(x) > 4:
 			print('\n', x , end="	")
 		else: print(x, end="	")
 
+### print(skaters())
 
 
 ### Goalies ###
@@ -41,32 +42,58 @@ def goalies():
 
 	#url path, request and parser
 
-	goalie_url = "https://www.hockey-reference.com/leagues/NHL_2019_goalies.html"
-	response = requests.get(goalie_url)
+	url = "https://www.hockey-reference.com/leagues/NHL_2019_goalies.html"
+	response = requests.get(url)
 	content = BeautifulSoup(response.content, "html.parser")
 
 	#player, gp, w, sv, sa, sv%, sho
 
-	goalie_scrape = ["player", "games_goalie", "wins_goalie", "saves", "shots_against", "save_pct", "shutouts"]
+	scrape = ["player", "games_goalie", "wins_goalie", "saves", "shots_against", "save_pct", "shutouts"]
 
 
-	goalies = []
+	data = []
 
-
-	for stats in content.find_all("td", {"data-stat": goalie_scrape}):
-		goalies.append(stats.text)
-
-	for x in goalies:
+	#loops over scrape list and appends all data to the players list
+	for stats in content.find_all("td", {"data-stat": scrape}):
+		data.append(stats.text)
+	#loops over all data in players list and formats for importing into SQL table
+	for x in data:
 		if len(x) > 4:
 			print('\n', x , end="	")
 		else: print(x, end="	")
 
-print(goalies())
+### print(goalies())
+
+
+### Keeper League Options ###
+
+def keepers(): 
+
+	#url path, request and parser
+	#url is specific to league, must be manually entered
+
+	url = "https://hockey.fantasysports.yahoo.com/hockey/3872/startingrosters"
+	response = requests.get(url)
+	content = BeautifulSoup(response.content, "html.parser")
+
+	data = []
+
+	#finds all palyers that have been marked as keeper
+	for stats in content.find_all("a", {"class": "name"}):
+		data.append(stats.text)
+
+	for x in data:
+		print(x)
+
+print(keepers())
+	
+
+#<a class="Nowrap name F-link" href="https://sports.yahoo.com/nhl/players/6743" target="_blank" id="yui_3_18_1_1_1568845890376_2242">Connor #McDavid</a> <span class="Fz-xxs" id="yui_3_18_1_1_1568845890376_2241">Edm - C</span> <span class="F-icon Fz-xs Cur-p" title="This player is a #keeper." id="yui_3_18_1_1_1568845890376_2227"></span>
 
 
 ### Data that needs ranked and scored individually ###
 
-#5 year stats, 0 - 100
+#1 year stats, 0 - 100
 
 #trends, 0 - 100
 
