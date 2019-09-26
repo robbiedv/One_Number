@@ -1,0 +1,4 @@
+ Semyon Varlamov	118	178	55%	20	1360	1496	.909	2	
+ David Rittich	149	168	27%	27	1119	1228	.911	1	
+ Devan Dubnyk	115	103	63%	31	1714	1877	.913	2	
+ Antti Raanta	103	421	51%	5	318	351	.906	0

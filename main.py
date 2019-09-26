@@ -3,9 +3,45 @@
 import requests 
 from bs4 import BeautifulSoup
 
-#ultimate goal is to have a list of players with
-#a high probability of being drafted that will 
-#produce the most
+
+### ROSTER FUNCTION ###
+
+def roster ():
+	
+	# getting projected stats for my team
+	url = "https://hockey.fantasysports.yahoo.com/hockey/3872/10"
+	response = requests.get(url)
+	content = BeautifulSoup(response.content, "html.parser")
+
+	tag = ["a", "td"]
+
+	scrape = ["name", "Ta-end"]
+
+	data = []
+	
+	for stats in content.find_all(tag, {"class" : scrape}):
+		data.append(stats.text)
+
+	for x in data:
+		if len(x) > 4:
+			print('\n',x, end="	")
+		else: print(x, end="	")
+
+print(roster())
+
+
+#import mysql.connector
+
+#cnx = mysql.connector.connect(user="root", password="wrIght 16", host="127.0.0.1", database="skaters")
+#cursor=cnx.cursor()
+
+#query = ("SELECT * FROM skaters")
+
+#for x in query:
+#	print(x) 
+
+#cursor.close()
+#cnx.close()
 
 ### Skaters ###
 
@@ -21,7 +57,6 @@ def skaters ():
 
 	scrape = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
-
 	data = []
 
 	#loops over scrape list and appends all data to the players list
@@ -30,7 +65,7 @@ def skaters ():
 	#loops over all data in players list and formats for importing into SQL table
 	for x in data:
 		if len(x) > 4:
-			print('\n', x , end="	")
+			print('\n',x , end="	")
 		else: print(x, end="	")
 
 ### print(skaters())
@@ -46,7 +81,7 @@ def goalies():
 	response = requests.get(url)
 	content = BeautifulSoup(response.content, "html.parser")
 
-	#player, gp, w, sv, sa, sv%, sho
+	#player, gp, w, sv, sa, sv_pct, sho
 
 	scrape = ["player", "games_goalie", "wins_goalie", "saves", "shots_against", "save_pct", "shutouts"]
 
@@ -59,7 +94,7 @@ def goalies():
 	#loops over all data in players list and formats for importing into SQL table
 	for x in data:
 		if len(x) > 4:
-			print('\n', x , end="	")
+			print("\n",x , end="	")
 		else: print(x, end="	")
 
 ### print(goalies())
@@ -78,29 +113,29 @@ def keepers():
 
 	data = []
 
-	#finds all palyers that have been marked as keeper
+	#finds all players that have been marked as keeper
 	for stats in content.find_all("a", {"class": "name"}):
 		data.append(stats.text)
 
 	for x in data:
-		print(x)
+		print('',x)
 
-print(keepers())
-	
-
-#<a class="Nowrap name F-link" href="https://sports.yahoo.com/nhl/players/6743" target="_blank" id="yui_3_18_1_1_1568845890376_2242">Connor #McDavid</a> <span class="Fz-xxs" id="yui_3_18_1_1_1568845890376_2241">Edm - C</span> <span class="F-icon Fz-xs Cur-p" title="This player is a #keeper." id="yui_3_18_1_1_1568845890376_2227"></span>
+### print(keepers())
 
 
-### Data that needs ranked and scored individually ###
+### Draft Strategy ###
 
-#1 year stats, 0 - 100
+# calculated amount of stats in each category to win category
 
-#trends, 0 - 100
+# Example #
 
-#prediction (takes into account trades etc. use NHL) 0 - 100
+# g : 410
+# a : 720
+# p : 1,100
+#ppg : 100 
 
-#draftability (based on mock drafts) 0 - 100
-
+# determine what combination of players is necessary to reach these benchmarks
+# using draft position and average draft pick, compile a "most likely" team
 
 ### Compile all data and give overall score ###
 
@@ -112,12 +147,18 @@ print(keepers())
 
 #few good players at position
 
-#roster slots
+#Roster
 #C = 4
 #LW = 4
 #RW = 4
 #D = 6
 #G = 2
+#Skaters Bench = 8
+#Goalies Bench = 2
+#Total = 30
+
+#in an 10 team league, this means the top 300 players will be drafted. In theory. 
+
 
 ### Generate draft ranked draft list ###
 
