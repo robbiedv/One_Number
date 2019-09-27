@@ -3,6 +3,26 @@
 import requests 
 from bs4 import BeautifulSoup
 
+import mysql.connector
+
+mydb = mysql.connector.connect (
+	host = "127.0.0.1",
+	user = "robbie",
+	passwd = "WildcatIsland16",
+	db = "fantasy_hockey"
+	)
+
+cursor = mydb.cursor()
+ 
+query = ("SELECT * FROM my_team")
+
+cursor.execute(query)
+
+for x in cursor:
+	print(x)
+
+cursor.close()
+mydb.close()
 
 ### ROSTER FUNCTION ###
 
@@ -27,21 +47,7 @@ def roster ():
 			print('\n',x, end="	")
 		else: print(x, end="	")
 
-print(roster())
-
-
-#import mysql.connector
-
-#cnx = mysql.connector.connect(user="root", password="wrIght 16", host="127.0.0.1", database="skaters")
-#cursor=cnx.cursor()
-
-#query = ("SELECT * FROM skaters")
-
-#for x in query:
-#	print(x) 
-
-#cursor.close()
-#cnx.close()
+### print(roster())
 
 ### Skaters ###
 
