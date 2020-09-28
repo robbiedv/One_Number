@@ -2,7 +2,6 @@
 
 import requests
 import json
-from pprint import pprint
 from bs4 import BeautifulSoup
 
 
@@ -44,6 +43,7 @@ def skaters ():
 			ldata = line.split(',')
 			if len(ldata) > 10:
 				temp_data = {
+					'Player': ldata[0],
 					'Pos':ldata[1],
 					'GP':ldata[2],
 					'G':ldata[3],
@@ -60,5 +60,4 @@ def skaters ():
 				formatted.append(temp_data)
 	with open('skaters.json', 'w') as fp:
 		json.dump(formatted, fp, indent=4)
-	pprint(formatted)
 skaters()
