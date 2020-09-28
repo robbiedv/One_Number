@@ -1,3 +1,4 @@
+[![Generic badge](https://img.shields.io/badge/Status-Development-blue.svg)]()
 # One Number
 An app that helps draft a winning Fantasy Hockey Team
 
