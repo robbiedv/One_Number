@@ -1,6 +1,8 @@
 #! /bin/bash/python3
 
 import requests
+import json
+from pprint import pprint
 from bs4 import BeautifulSoup
 
 
@@ -30,8 +32,33 @@ def skaters ():
 		if len(x) > 4:
 			f.write("\n")
 			f.write(x)
-			f.write(' ')
+			f.write(',')
 		else:
 			f.write(x)
-			f.write(' ')
+			f.write(',')
+
+	formatted = []
+	with open('skatersDB.txt', 'r') as data:
+		for line in data:
+			line = line.strip()
+			ldata = line.split(',')
+			if len(ldata) > 10:
+				temp_data = {
+					'Pos':ldata[1],
+					'GP':ldata[2],
+					'G':ldata[3],
+					'A':ldata[4],
+					'P':ldata[5],
+					'PM':ldata[6],
+					'PPG':ldata[7],
+					'PPA':ldata[8],
+					'S':ldata[9],
+					'BLK':ldata[10],
+					'H':ldata[11],
+					'FW':ldata[12]
+				}
+				formatted.append(temp_data)
+	with open('skaters.json', 'w') as fp:
+		json.dump(formatted, fp, indent=4)
+	pprint(formatted)
 skaters()
