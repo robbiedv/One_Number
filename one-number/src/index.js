@@ -16,7 +16,7 @@ ReactDOM.render(
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(skaterData.Patrick_Kane)
+  console.log(skaterData)
 })
 
 

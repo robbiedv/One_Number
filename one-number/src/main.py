@@ -28,7 +28,7 @@ def skaters ():
 	f = open('./data/skatersDB.txt', 'w')
 
 	for i in scraped:
-		data.append(i.text)
+		data.append(i.text.replace(" ", "_"))
 	for x in data:
 		if len(x) > 4:
 			f.write("\n")
