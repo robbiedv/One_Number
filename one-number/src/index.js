@@ -12,13 +12,11 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-var test = JSON.parse(skaterData)
-
 
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(test.skaters.Player)
+  alert('click')
 })
 
 
