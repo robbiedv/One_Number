@@ -7,8 +7,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   text-align: center;
-  background-color: #381D2A;
-  color: #F0F6F6;
+  background-color: #F3F3FC;
+  color: #05042C;
 }
 
 .main-title {
@@ -18,6 +18,7 @@
   grid-column: 1 / -1;
   grid-row: 1;
   justify-self: center;
+  line-height: 0.8em;
 }
 
 .main-tag {
@@ -33,7 +34,7 @@
   justify-self: center;
   align-self: center;
   background-color: transparent;
-  border: 0.15em solid #F0F6F6;
+  border: 0.15em solid #05042C;
   color: white;
   width: 4em;
   height: 4em;
@@ -43,11 +44,11 @@
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  color: #F0F6F6;
+  color: #05042C;
 }
 
 #button:hover {
-  background-color: #F0F6F6;
-  color: #381D2A;
+  background-color: #05042C;
+  color: #F3F3FC;
   transition: 0.3s;
 }
