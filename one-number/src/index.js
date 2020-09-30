@@ -12,11 +12,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+let skaters = skaterData
 
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(skaterData)
+  console.log(skaters.Pontus_Aberg)
 })
 
 

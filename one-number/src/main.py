@@ -46,23 +46,21 @@ def skaters ():
 
 	skatersTxt = './data/skatersDB.txt'
 	dict1 = {}
-
 	fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
 
 	with open(skatersTxt) as fh:
-		dict2 = {}
 		for line in fh:
 			name = list( line.strip().split(",", 14))[0]
-			description = list( line.strip().split(",", 13))
+			description = list(line.strip().split(",", 13))
 
 			if (len(description) > 10):
-				i = 0
 
+				i = 0
+				dict2 = {}
 				while i < len(fields):
 					dict2[fields[i]] = description[i+1]
 					i = i + 1
-
-			dict1[name] = dict2
+					dict1[name] = dict2
 
 	out_file = open("./data/skaters.json", "w")
 	json.dump(dict1, out_file, indent = 4)
