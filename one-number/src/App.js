@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'normalize.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className="grid-container">
+          <h1 className="main-title">
+            1 Number
+          <br />
+          <span className="main-tag">
+              Draft Your Team
+          </span>
+          </h1>
+          <button id="button" type="submit">
+            START
+          </button>
+        </div>
     </div>
   );
 }

@@ -11,6 +11,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+let button = document.getElementById('button')
+
+button.addEventListener('click', function() {
+  alert('Button Was Clicked')
+})
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
