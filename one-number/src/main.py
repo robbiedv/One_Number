@@ -38,19 +38,28 @@ def skaters ():
 
 	skatersTxt = 'skatersDB.txt'
 	dict1 = {}
+
 	fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
 
 	with open(skatersTxt) as fh:
 		dict2 = {}
 		for line in fh:
+			name = list(line.strip().split(",", 14))[0]
 			description = list( line.strip().split(",", 13))
 			if (len(description) > 10):
 				i = 0
 				while i < len(fields):
 					dict2[fields[i]] = description[i+1]
 					i = i + 1
-		name = list(line.strip().split(",", 0))
-		dict1[name[0]] = dict2
+
+
+			dict1[name] = dict2
+			print(dict1)
+
+			# j = 0
+			# while j < len(dict2):
+			# 	dict1[name[0]] = dict2
+			# 	j = j = 1
 
 				# description2 = list( line.strip().split(",", 1))
 				# j = 0
@@ -58,7 +67,6 @@ def skaters ():
 				# while j < len(fields2):
 				# 	dict2[fields2[j]] =
 				# 	j = j + 1
-		print(dict1)
 
 	# with open('skatersDB.txt', 'r') as data:
 	# 	for line in data:
