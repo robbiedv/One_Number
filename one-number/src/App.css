@@ -7,8 +7,13 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   text-align: center;
-  background-color: #05042C;
   color: #F3F3FC;
+  background-color: #05042C;
+  /* background: hsla(242, 83%, 9%, 1);
+  background: linear-gradient(45deg, hsla(242, 83%, 9%, 1) 0%, hsla(215, 68%, 54%, 1) 100%);
+  background: -moz-linear-gradient(45deg, hsla(242, 83%, 9%, 1) 0%, hsla(215, 68%, 54%, 1) 100%);
+  background: -webkit-linear-gradient(45deg, hsla(242, 83%, 9%, 1) 0%, hsla(215, 68%, 54%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#05042C", endColorstr="#3B7EDA", GradientType=1 ); */
 }
 
 .main-title {

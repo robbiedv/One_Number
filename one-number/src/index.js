@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import skaterData from './data/skaters.json';
+import skaters from './data/skaters.json';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,12 +12,16 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-let skaters = skaterData
+// for every player (and Obj) create new array with all stats added together
+
+for (let player in skaters) {
+  console.log(`${player} GOALS = ${skaters[player].G}`)
+}
 
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(skaters.Pontus_Aberg)
+  console.log(skaters.Patrick_Kane)
 })
 
 
