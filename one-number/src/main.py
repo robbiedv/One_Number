@@ -36,28 +36,45 @@ def skaters ():
 			f.write(x)
 			f.write(',')
 
-	formatted = []
-	with open('skatersDB.txt', 'r') as data:
-		for line in data:
-			line = line.strip()
-			ldata = line.split(',')
-			if len(ldata) > 10:
-				temp_data = {
-					'Player': ldata[0],
-					'Pos':ldata[1],
-					'GP':ldata[2],
-					'G':ldata[3],
-					'A':ldata[4],
-					'P':ldata[5],
-					'PM':ldata[6],
-					'PPG':ldata[7],
-					'PPA':ldata[8],
-					'S':ldata[9],
-					'BLK':ldata[10],
-					'H':ldata[11],
-					'FW':ldata[12]
-				}
-				formatted.append(temp_data)
-	with open('skaters.json', 'w') as fp:
-		json.dump(formatted, fp, indent=4)
+	skatersTxt = 'skatersDB.txt'
+	dict1 = {}
+	fields = ['GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
+
+	with open(skatersTxt) as fh:
+		for line in fh:
+			description = list( line.strip().split(",", 12))
+			if (len(description) > 10):
+				i = 0
+				dict2 = {}
+
+				while i<len(fields):
+					dict2[fields[i]] = description[i+2]
+					i = i + 1
+				print(dict2)
+
+	# with open('skatersDB.txt', 'r') as data:
+	# 	for line in data:
+	# 		line = line.strip()
+	# 		ldata = line.split(',')
+	# 		if len(ldata) > 10:
+	# 			temp_data = {
+	# 			ldata[0]: {
+	# 			'Pos':ldata[1],
+	# 			'Stats': {
+	# 				'GP':ldata[2],
+	# 				'G':ldata[3],
+	# 				'A':ldata[4],
+	# 				'P':ldata[5],
+	# 				'PM':ldata[6],
+	# 				'PPG':ldata[7],
+	# 				'PPA':ldata[8],
+	# 				'S':ldata[9],
+	# 				'BLK':ldata[10],
+	# 				'H':ldata[11],
+	# 				'FW':ldata[12]
+	# 				}
+	# 			}}
+	# 			formatted.append(temp_data)
+	# with open('skaters.json', 'w') as fp:
+	# 	json.dump(formatted, fp, indent=4)
 skaters()
