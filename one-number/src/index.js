@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import skaterData from './skaters.json';
+import skaterData from './data/skaters.json';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +16,7 @@ ReactDOM.render(
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  alert('click')
+  console.log(skaterData.Patrick_Kane)
 })
 
 

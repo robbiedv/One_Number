@@ -25,11 +25,10 @@ def skaters ():
 
 	data = []
 	scraped = content.find_all("td", {"data-stat": stats})
-	f = open('skatersDB.txt', 'w')
+	f = open('./data/skatersDB.txt', 'w')
 
 	for i in scraped:
 		data.append(i.text)
-
 	for x in data:
 		if len(x) > 4:
 			f.write("\n")
@@ -45,7 +44,7 @@ def skaters ():
 
 ### Carl Gunnarsson creating duplicate entry in json with no name
 
-	skatersTxt = 'skatersDB.txt'
+	skatersTxt = './data/skatersDB.txt'
 	dict1 = {}
 
 	fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
@@ -65,7 +64,7 @@ def skaters ():
 
 			dict1[name] = dict2
 
-	out_file = open("skaters.json", "w")
+	out_file = open("./data/skaters.json", "w")
 	json.dump(dict1, out_file, indent = 4)
 	out_file.close()
 

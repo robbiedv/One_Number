@@ -7,8 +7,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   text-align: center;
-  background-color: #F3F3FC;
-  color: #05042C;
+  background-color: #05042C;
+  color: #F3F3FC;
 }
 
 .main-title {
@@ -34,7 +34,7 @@
   justify-self: center;
   align-self: center;
   background-color: transparent;
-  border: 0.15em solid #05042C;
+  border: 0.15em solid #F3F3FC;
   color: white;
   width: 4em;
   height: 4em;
@@ -44,11 +44,11 @@
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  color: #05042C;
+  color: #F3F3FC;
 }
 
 #button:hover {
-  background-color: #05042C;
-  color: #F3F3FC;
+  background-color:#F3F3FC;
+  color: #05042C;
   transition: 0.3s;
 }
