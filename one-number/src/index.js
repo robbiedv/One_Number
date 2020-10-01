@@ -14,16 +14,39 @@ ReactDOM.render(
 
 // for every player create new key value pair. Player: 1Number
 
-// for (let player in skaters) {
-//   let g = skaters[player].G
-//   let a = skaters[player].A
-//   console.log(player, (g + a),  skaters[player].P)
-// }
+let exampleData = {
+  Riley_Stillman: {
+      Pos: "D",
+      GP: "34",
+      G: "0",
+      A: "5",
+      P: "5",
+      PM: "14",
+      PPG: "0",
+      PPA: "0",
+      S: "39",
+      BLK: "57",
+      H: "59",
+      FW: "0"
+  }
+}
+
+
 
 for (let player in skaters) {
-  let g = parseInt(skaters[player].G);
-  let a = parseInt(skaters[player].A);
-  console.log(player, " # = ", g + a, "Points = ", skaters[player].P)
+  let stats = 0;
+  stats += parseInt(skaters[player].GP);
+  stats += parseInt(skaters[player].G);
+  stats += parseInt(skaters[player].A);
+  stats += parseInt(skaters[player].P);
+  stats += parseInt(skaters[player].PM);
+  stats += parseInt(skaters[player].PPG);
+  stats += parseInt(skaters[player].PPA);
+  stats += parseInt(skaters[player].S);
+  stats += parseInt(skaters[player].BLK);
+  stats += parseInt(skaters[player].H);
+  stats += parseInt(skaters[player].FW);
+  console.log(player, stats)
 }
 
 
