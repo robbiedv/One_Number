@@ -12,16 +12,25 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// for every player (and Obj) create new array with all stats added together
+// for every player create new key value pair. Player: 1Number
+
+// for (let player in skaters) {
+//   let g = skaters[player].G
+//   let a = skaters[player].A
+//   console.log(player, (g + a),  skaters[player].P)
+// }
 
 for (let player in skaters) {
-  console.log(`${player} GOALS = ${skaters[player].G}`)
+  let g = parseInt(skaters[player].G);
+  let a = parseInt(skaters[player].A);
+  console.log(player, " # = ", g + a, "Points = ", skaters[player].P)
 }
+
 
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(skaters.Patrick_Kane)
+  console.log(skaters.Patrick_Kane.G)
 })
 
 
