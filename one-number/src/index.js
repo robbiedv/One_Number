@@ -65,7 +65,7 @@ function addStats() {
     } else if (pos === "LW") {
       leftW.push(player, stats)
     } else if (pos === "C" || pos === "F") {
-      center.push([player, stats])
+      center.push([player, pos, stats])
     } else if (pos === "D") {
       defense.push(player, stats)
     }
@@ -81,9 +81,9 @@ on number of total stats in descending oder
 
 function sortPlayers(a, b) {
   for (let index in defense) {
-    if (a[1] > b[1]) {
+    if (a[2] > b[2]) {
       return -1;
-    } else if (b[1] > a[1]) {
+    } else if (b[2] > a[2]) {
       return 1;
     } else {
       return 0;

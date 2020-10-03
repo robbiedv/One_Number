@@ -11,6 +11,8 @@ def skaters ():
 
 	#url path, request and parser
 
+
+
 	url = "https://www.hockey-reference.com/leagues/NHL_2020_skaters.html"
 	response = requests.get(url)
 	content = BeautifulSoup(response.content, "html.parser")
@@ -19,28 +21,46 @@ def skaters ():
 
 	stats = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
-#####################################################
-# Formating and writing scraped data to a text file #
-#####################################################
+##############################################
+# FORMAT AND WRITE SCRAPED DATA TO TEXT FILE #
+##############################################
 
 	data = []
 	scraped = content.find_all("td", {"data-stat": stats})
-	f = open('./data/skatersDB.txt', 'w')
+
+	file = open('./data/skatersWithDups.txt', 'w')
 
 	for i in scraped:
 		data.append(i.text.replace(" ", "_"))
 	for x in data:
 		if len(x) > 4:
-			f.write("\n")
-			f.write(x)
-			f.write(',')
+			file.write("\n")
+			file.write(x)
+			file.write(',')
 		else:
-			f.write(x)
-			f.write(',')
+			file.write(x)
+			file.write(',')
 
-#######################################################
-# Converting text document to JSON and exporting file #
-#######################################################
+
+##############################
+# REMOVING DUPLICATE ENTRIES #
+##############################
+
+	namesSeen = set()
+	outfile = open('./data/skatersDB.txt', "w")
+	infile = open('./data/skatersWithDups.txt', "r")
+	for line in infile:
+		name = list(line.strip().split(",", 14))[0]
+		print(name)
+		if name not in namesSeen:
+			outfile.write(line)
+			namesSeen.add(name)
+	outfile.close()
+	print(namesSeen)
+
+###############################################
+# CONVERTING TEXT DOC TO JSON AND EXPORT FILE #
+###############################################
 
 ### Carl Gunnarsson creating duplicate entry in json with no name
 
@@ -48,13 +68,12 @@ def skaters ():
 	dict1 = {}
 	fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
 
-	with open(skatersTxt) as fh:
-		for line in fh:
+	with open(skatersTxt) as skatersDoc:
+		for line in skatersDoc:
 			name = list( line.strip().split(",", 14))[0]
 			description = list(line.strip().split(",", 13))
 
 			if (len(description) > 10):
-
 				i = 0
 				dict2 = {}
 				while i < len(fields):
