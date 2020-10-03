@@ -9,7 +9,9 @@ ReactDOM.render(<React.StrictMode>
   <App/>
 </React.StrictMode>, document.getElementById('root'));
 
-// for every player create new key value pair. Player: 1Number
+/*******************
+*** EXAMPLE DATA ***
+*******************/
 
 let exampleData = {
   Riley_Stillman: {
@@ -28,10 +30,20 @@ let exampleData = {
   }
 }
 
-let rw = []
-let lw = []
-let c = []
-let d = []
+/*******************
+*** SORTING DATA ***
+*******************/
+
+let rightW = []
+let leftW = []
+let center = []
+let defense = []
+
+
+/***
+Adding each players stats together and pushing
+to new array based on player position
+***/
 
 function addStats() {
   for (let player in skaters) {
@@ -49,13 +61,32 @@ function addStats() {
     stats += parseInt(skaters[player].FW);
     let pos = skaters[player].Pos;
     if (pos === "RW") {
-      rw.push(player, stats)
+      rightW.push(player, stats)
     } else if (pos === "LW") {
-      lw.push(player, stats)
+      leftW.push(player, stats)
     } else if (pos === "C" || pos === "F") {
-      c.push([player, stats])
-    } else if(pos === "D") {
-      d.push(player, stats)
+      center.push([player, stats])
+    } else if (pos === "D") {
+      defense.push(player, stats)
+    }
+  }
+}
+
+addStats()
+
+/***
+Callback function for sorting players based
+on number of total stats in descending oder
+***/
+
+function sortPlayers(a, b) {
+  for (let index in defense) {
+    if (a[1] > b[1]) {
+      return -1;
+    } else if (b[1] > a[1]) {
+      return 1;
+    } else {
+      return 0;
     }
   }
 }
@@ -63,8 +94,7 @@ function addStats() {
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  addStats()
-  console.log(c)
+  console.log(center.sort(sortPlayers))
 })
 
 // If you want your app to work offline and load faster, you can change
