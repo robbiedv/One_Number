@@ -4,85 +4,100 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
+### POSITIONS TO SCRAPE
+skaterStats = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
-### Skaters ###
+goalieStats = ["player", "starts_goalie", "wins_goalie", "goals_against", "saves", "save_pct", "shutouts"]
 
-def skaters ():
+### URLS FOR DATA SCRAPE
+skaterURL = "https://www.hockey-reference.com/leagues/NHL_2020_skaters.html"
+goalieURL = "https://www.hockey-reference.com/leagues/NHL_2020_goalies.html"
 
-	#url path, request and parser
+### FILES TO WRITE TO
+skaterFile = open('./data/skaters.txt', 'w')
+goalieFile = open('./data/goalies.txt', 'w')
+
+## LISTS FOR STORING SCRAPED DATA
+skaterData = []
+goalieData = []
 
 
+###############################
+### CREATE SKATERS DATABASE ###
+###############################
 
-	url = "https://www.hockey-reference.com/leagues/NHL_2020_skaters.html"
+def scrape (url, stats, data):
+
+	### BEAUTIFUL SOUP SETUP
 	response = requests.get(url)
 	content = BeautifulSoup(response.content, "html.parser")
 
-	#player, pos, gp, g, a, pim, ppg, ppa, sog, blk, hit, fw
+	### TD ELEMENTS WITH A TAG OF 'DATA-STAT': LIST
+	scrapedData = content.find_all("td", {"data-stat": stats})
 
-	stats = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
-
-##############################################
-# FORMAT AND WRITE SCRAPED DATA TO TEXT FILE #
-##############################################
-
-	data = []
-	scraped = content.find_all("td", {"data-stat": stats})
-
-	file = open('./data/skatersWithDups.txt', 'w')
-
-	for i in scraped:
+	### LOOPING OVER DATA TO WRITE TO TXT FILE
+	for i in scrapedData:
+		# replacing spaces in name with underscore
 		data.append(i.text.replace(" ", "_"))
-	for x in data:
-		if len(x) > 4:
+
+
+###########################
+# WRITE DATA TO TEXT FILE #
+###########################
+
+def dataToTxt(data, file):
+	for stat in data:
+		if len(stat) > 4:
 			file.write("\n")
-			file.write(x)
+			file.write(stat)
 			file.write(',')
 		else:
-			file.write(x)
+			file.write(stat)
 			file.write(',')
+
+scrape(skaterURL, skaterStats, skaterData)
+dataToTxt(skaterData, skaterFile)
 
 
 ##############################
 # REMOVING DUPLICATE ENTRIES #
 ##############################
 
-	namesSeen = set()
-	outfile = open('./data/skatersDB.txt', "w")
-	infile = open('./data/skatersWithDups.txt', "r")
-	for line in infile:
-		name = list(line.strip().split(",", 14))[0]
-		print(name)
-		if name not in namesSeen:
-			outfile.write(line)
-			namesSeen.add(name)
-	outfile.close()
-	print(namesSeen)
+	# namesSeen = set()
+	# outfile = open('./data/skatersDB.txt', "w")
+	# infile = open('./data/skatersWithDups.txt', "r")
 
-###############################################
-# CONVERTING TEXT DOC TO JSON AND EXPORT FILE #
-###############################################
 
-### Carl Gunnarsson creating duplicate entry in json with no name
+	# for line in infile:
+	# 	name = list(line.strip().split(",", 14))[0]
+	# 	print(name)
+	# 	if name not in namesSeen:
+	# 		outfile.write(line)
+	# 		namesSeen.add(name)
+	# outfile.close()
 
-	skatersTxt = './data/skatersDB.txt'
-	dict1 = {}
-	fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
+###############################
+# CONVERTING TEXT DOC TO JSON #
+###############################
 
-	with open(skatersTxt) as skatersDoc:
-		for line in skatersDoc:
-			name = list( line.strip().split(",", 14))[0]
-			description = list(line.strip().split(",", 13))
 
-			if (len(description) > 10):
-				i = 0
-				dict2 = {}
-				while i < len(fields):
-					dict2[fields[i]] = description[i+1]
-					i = i + 1
-					dict1[name] = dict2
-
-	out_file = open("./data/skaters.json", "w")
-	json.dump(dict1, out_file, indent = 4)
-	out_file.close()
-
-skaters()
+	# skatersTxt = './data/skatersDB.txt'
+	# dict1 = {}
+	# fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
+	#
+	# with open(skatersTxt) as skatersDoc:
+	# 	for line in skatersDoc:
+	# 		name = list( line.strip().split(",", 14))[0]
+	# 		description = list(line.strip().split(",", 13))
+	#
+	# 		if (len(description) > 10):
+	# 			i = 0
+	# 			dict2 = {}
+	# 			while i < len(fields):
+	# 				dict2[fields[i]] = description[i+1]
+	# 				i = i + 1
+	# 				dict1[name] = dict2
+	#
+	# out_file = open("./data/skaters.json", "w")
+	# json.dump(dict1, out_file, indent = 4)
+	# out_file.close()
