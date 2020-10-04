@@ -72,6 +72,7 @@ def removeDups(test):
 			if name not in namesSeen:
 				outfile.write(line)
 				namesSeen.add(name)
+		outfile.close()
 
 	elif (test == "skater"):
 		outfile = open('./data/skaterDB.txt', "w")
@@ -82,45 +83,67 @@ def removeDups(test):
 			if name not in namesSeen:
 				outfile.write(line)
 				namesSeen.add(name)
-	outfile.close()
-
-
-def skaters():
-	scrape(skaterURL, skaterStats, skaterData)
-	dataToTxt(skaterData, skaterFile)
-	removeDups("skater")
-
-def goalies():
-	scrape(goalieURL, goalieStats, goalieData)
-	dataToTxt(goalieData, goalieFile)
-	removeDups("goalie")
-
-goalies()
-
+		outfile.close()
 
 
 ###############################
 # CONVERTING TEXT DOC TO JSON #
 ###############################
 
+skaterKeys = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
+goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV%', 'SH']
 
-	# skatersTxt = './data/skatersDB.txt'
-	# dict1 = {}
-	# fields = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
-	#
-	# with open(skatersTxt) as skatersDoc:
-	# 	for line in skatersDoc:
-	# 		name = list( line.strip().split(",", 14))[0]
-	# 		description = list(line.strip().split(",", 13))
-	#
-	# 		if (len(description) > 10):
-	# 			i = 0
-	# 			dict2 = {}
-	# 			while i < len(fields):
-	# 				dict2[fields[i]] = description[i+1]
-	# 				i = i + 1
-	# 				dict1[name] = dict2
-	#
-	# out_file = open("./data/skaters.json", "w")
-	# json.dump(dict1, out_file, indent = 4)
-	# out_file.close()
+def dataToJSON(keys, test):
+
+	dict1 = {}
+
+	if (test == "skater"):
+		with open('./data/skaterDB.txt') as txtFile:
+			for line in txtFile:
+				name = list( line.strip().split(",", 14))[0]
+				stats = list(line.strip().split(",", 13))
+
+				if (len(stats) > 10):
+					i = 0
+					dict2 = {}
+					while i < len(keys):
+						dict2[keys[i]] = stats[i+1]
+						i = i + 1
+						dict1[name] = dict2
+
+		outfile = open("./data/skaters.json", "w")
+		json.dump(dict1, outfile, indent = 4)
+		outfile.close()
+
+	if (test == "goalie"):
+		with open('./data/goalieDB.txt') as txtFile:
+			for line in txtFile:
+				name = list( line.strip().split(",", 8))[0]
+				stats = list(line.strip().split(",", 7))
+
+				if (len(stats) > 5):
+					i = 0
+					dict2 = {}
+					while i < len(keys):
+						dict2[keys[i]] = stats[i+1]
+						i = i + 1
+						dict1[name] = dict2
+		out_file = open("./data/goalies.json", "w")
+		json.dump(dict1, out_file, indent = 4)
+		out_file.close()
+
+
+def skaters():
+	scrape(skaterURL, skaterStats, skaterData)
+	dataToTxt(skaterData, skaterFile)
+	removeDups("skater")
+	dataToJSON(skaterKeys, "skater")
+
+def goalies():
+	scrape(goalieURL, goalieStats, goalieData)
+	dataToTxt(goalieData, goalieFile)
+	removeDups("goalie")
+	dataToJSON(goalieKeys, "goalie")
+
+goalies()
+skaters()
