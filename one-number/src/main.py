@@ -47,6 +47,7 @@ def scrape (url, stats, data):
 
 def dataToTxt(data, file):
 	for stat in data:
+		# inserting new line at every player name
 		if len(stat) > 4:
 			file.write("\n")
 			file.write(stat)
@@ -66,7 +67,9 @@ def removeDups(test):
 	if (test == "goalie"):
 		outfile = open('./data/goalieDB.txt', "w")
 		infile = open('./data/goalie.txt', "r")
+		# set for checking against
 		namesSeen = set()
+
 		for line in infile:
 			name = list(line.strip().split(",", 8))[0]
 			if name not in namesSeen:
@@ -77,7 +80,9 @@ def removeDups(test):
 	elif (test == "skater"):
 		outfile = open('./data/skaterDB.txt', "w")
 		infile = open('./data/skater.txt', "r")
+		# set for checking against
 		namesSeen = set()
+
 		for line in infile:
 			name = list(line.strip().split(",", 14))[0]
 			if name not in namesSeen:
@@ -91,7 +96,7 @@ def removeDups(test):
 ###############################
 
 skaterKeys = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
-goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV%', 'SH']
+goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV-PCT', 'SH']
 
 def dataToJSON(keys, test):
 
@@ -103,12 +108,15 @@ def dataToJSON(keys, test):
 				name = list( line.strip().split(",", 14))[0]
 				stats = list(line.strip().split(",", 13))
 
+				# removes entries with incomplete stats
 				if (len(stats) > 10):
 					i = 0
 					dict2 = {}
 					while i < len(keys):
+						# loops over keys list, assigns stat as value
 						dict2[keys[i]] = stats[i+1]
 						i = i + 1
+						# adds player name as key, all stats as value
 						dict1[name] = dict2
 
 		outfile = open("./data/skaters.json", "w")
@@ -121,13 +129,17 @@ def dataToJSON(keys, test):
 				name = list( line.strip().split(",", 8))[0]
 				stats = list(line.strip().split(",", 7))
 
+				# removes entries with incomplete stats
 				if (len(stats) > 5):
 					i = 0
 					dict2 = {}
 					while i < len(keys):
+						# loops over keys list, assigns stat as value
 						dict2[keys[i]] = stats[i+1]
 						i = i + 1
+						# adds player name as key, all stats as value
 						dict1[name] = dict2
+
 		out_file = open("./data/goalies.json", "w")
 		json.dump(dict1, out_file, indent = 4)
 		out_file.close()

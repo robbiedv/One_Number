@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import skaters from './data/skaters.json';
+import skatersJSON from './data/skaters.json';
+import goaliesJSON from './data/goalies.json';
 
 ReactDOM.render(<React.StrictMode>
   <App/>
@@ -13,7 +14,7 @@ ReactDOM.render(<React.StrictMode>
 *** EXAMPLE DATA ***
 *******************/
 
-let exampleData = {
+let exampleSkater = {
   Riley_Stillman: {
     Pos: "D",
     GP: "34",
@@ -30,6 +31,19 @@ let exampleData = {
   }
 }
 
+let exampleGoalie = {
+    Jake_Allen: {
+        GS: "21",
+        W: "12",
+        GA: "48",
+        SV: "607",
+        SV: ".927",
+        SH: "2"
+    }
+  }
+
+
+
 /*******************
 *** SORTING DATA ***
 *******************/
@@ -38,6 +52,7 @@ let rightW = []
 let leftW = []
 let center = []
 let defense = []
+let goalies = []
 
 
 /***
@@ -45,34 +60,49 @@ Adding each players stats together and pushing
 to new array based on player position
 ***/
 
-function addStats() {
-  for (let player in skaters) {
+function addSkaterStats() {
+  for (let player in skatersJSON) {
     let stats = 0;
-    stats += parseInt(skaters[player].GP);
-    stats += parseInt(skaters[player].G);
-    stats += parseInt(skaters[player].A);
-    stats += parseInt(skaters[player].P);
-    stats += parseInt(skaters[player].PM);
-    stats += parseInt(skaters[player].PPG);
-    stats += parseInt(skaters[player].PPA);
-    stats += parseInt(skaters[player].S);
-    stats += parseInt(skaters[player].BLK);
-    stats += parseInt(skaters[player].H);
-    stats += parseInt(skaters[player].FW);
-    let pos = skaters[player].Pos;
+    stats += parseInt(skatersJSON[player].GP);
+    stats += parseInt(skatersJSON[player].G);
+    stats += parseInt(skatersJSON[player].A);
+    stats += parseInt(skatersJSON[player].P);
+    stats += parseInt(skatersJSON[player].PM);
+    stats += parseInt(skatersJSON[player].PPG);
+    stats += parseInt(skatersJSON[player].PPA);
+    stats += parseInt(skatersJSON[player].S);
+    stats += parseInt(skatersJSON[player].BLK);
+    stats += parseInt(skatersJSON[player].H);
+    stats += parseInt(skatersJSON[player].FW);
+    let pos = skatersJSON[player].Pos;
     if (pos === "RW") {
-      rightW.push(player, stats)
+      rightW.push(player, pos, stats)
     } else if (pos === "LW") {
-      leftW.push(player, stats)
+      leftW.push(player, pos, stats)
     } else if (pos === "C" || pos === "F") {
       center.push([player, pos, stats])
     } else if (pos === "D") {
-      defense.push(player, stats)
+      defense.push(player, pos, stats)
     }
   }
 }
 
-addStats()
+function addGoalieStats() {
+  for (let player in goaliesJSON) {
+    let stats = 0;
+    stats += parseInt(goaliesJSON[player].GS);
+    stats += parseInt(goaliesJSON[player].W);
+    stats += parseInt(goaliesJSON[player].GA);
+    stats += parseInt(goaliesJSON[player].SV);
+    stats += parseInt(goaliesJSON[player].SV);
+    stats += parseInt(goaliesJSON[player].SH);
+    let pos = goaliesJSON[player].Pos;
+    goalies.push(player, stats)
+  }
+}
+
+addSkaterStats()
+addGoalieStats()
 
 /***
 Callback function for sorting players based
@@ -80,7 +110,7 @@ on number of total stats in descending oder
 ***/
 
 function sortPlayers(a, b) {
-  for (let index in defense) {
+  for (let index in goalies) {
     if (a[2] > b[2]) {
       return -1;
     } else if (b[2] > a[2]) {
@@ -94,7 +124,7 @@ function sortPlayers(a, b) {
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(center.sort(sortPlayers))
+  console.log(goalies.sort(sortPlayers))
 })
 
 // If you want your app to work offline and load faster, you can change
