@@ -11,40 +11,6 @@ ReactDOM.render(<React.StrictMode>
 </React.StrictMode>, document.getElementById('root'));
 
 /*******************
-*** EXAMPLE DATA ***
-*******************/
-
-let exampleSkater = {
-  Riley_Stillman: {
-    Pos: "D",
-    GP: "34",
-    G: "0",
-    A: "5",
-    P: "5",
-    PM: "14",
-    PPG: "0",
-    PPA: "0",
-    S: "39",
-    BLK: "57",
-    H: "59",
-    FW: "0"
-  }
-}
-
-let exampleGoalie = {
-    Jake_Allen: {
-        GS: "21",
-        W: "12",
-        GA: "48",
-        SV: "607",
-        SV: ".927",
-        SH: "2"
-    }
-  }
-
-
-
-/*******************
 *** SORTING DATA ***
 *******************/
 
@@ -67,22 +33,23 @@ function addSkaterStats() {
     stats += parseInt(skatersJSON[player].G);
     stats += parseInt(skatersJSON[player].A);
     stats += parseInt(skatersJSON[player].P);
-    stats += parseInt(skatersJSON[player].PM);
-    stats += parseInt(skatersJSON[player].PPG);
-    stats += parseInt(skatersJSON[player].PPA);
+    stats += parseInt(skatersJSON[player].PM * 0.5);
+    stats += parseInt(skatersJSON[player].PPG * 5);
+    stats += parseInt(skatersJSON[player].PPA * 5);
     stats += parseInt(skatersJSON[player].S);
     stats += parseInt(skatersJSON[player].BLK);
-    stats += parseInt(skatersJSON[player].H);
-    stats += parseInt(skatersJSON[player].FW);
+    stats += parseInt(skatersJSON[player].H * 0.5);
+    stats += parseInt(skatersJSON[player].FW) * 0.05;
     let pos = skatersJSON[player].Pos;
+    stats = Math.round(stats / 10);
     if (pos === "RW") {
-      rightW.push(player, pos, stats)
+      rightW.push([player, pos, stats])
     } else if (pos === "LW") {
-      leftW.push(player, pos, stats)
+      leftW.push([player, pos, stats])
     } else if (pos === "C" || pos === "F") {
       center.push([player, pos, stats])
     } else if (pos === "D") {
-      defense.push(player, pos, stats)
+      defense.push([player, pos, stats])
     }
   }
 }
@@ -95,9 +62,10 @@ function addGoalieStats() {
     stats += parseInt(goaliesJSON[player].GA);
     stats += parseInt(goaliesJSON[player].SV);
     stats += parseInt(goaliesJSON[player].SV);
-    stats += parseInt(goaliesJSON[player].SH);
+    stats += parseInt(goaliesJSON[player].SH * 50);
     let pos = goaliesJSON[player].Pos;
-    goalies.push(player, stats)
+    stats = stats / 50;
+    goalies.push([player, pos, stats])
   }
 }
 
@@ -109,8 +77,10 @@ Callback function for sorting players based
 on number of total stats in descending oder
 ***/
 
+let goofy = [1, 4]
+
 function sortPlayers(a, b) {
-  for (let index in goalies) {
+  for (let index in goofy) {
     if (a[2] > b[2]) {
       return -1;
     } else if (b[2] > a[2]) {
