@@ -13,14 +13,18 @@ goalieStats = ["player", "starts_goalie", "wins_goalie", "goals_against", "saves
 skaterURL = "https://www.hockey-reference.com/leagues/NHL_2020_skaters.html"
 goalieURL = "https://www.hockey-reference.com/leagues/NHL_2020_goalies.html"
 
+### FILES TO WRITE TO
+skaterFile = open('./data/skater.txt', 'w')
+goalieFile = open('./data/goalie.txt', 'w')
+
 ## LISTS FOR STORING SCRAPED DATA
 skaterData = []
 goalieData = []
 
 
-###############################
-### CREATE SKATERS DATABASE ###
-###############################
+###########################
+# CREATE SKATERS DATABASE #
+###########################
 
 def scrape (url, stats, data):
 
@@ -37,14 +41,9 @@ def scrape (url, stats, data):
 		data.append(i.text.replace(" ", "_"))
 
 
-
 ###########################
 # WRITE DATA TO TEXT FILE #
 ###########################
-
-### FILES TO WRITE TO
-skaterFile = open('./data/skater.txt', 'w')
-goalieFile = open('./data/goalie.txt', 'w')
 
 def dataToTxt(data, file):
 	for stat in data:
@@ -55,36 +54,50 @@ def dataToTxt(data, file):
 		else:
 			file.write(stat)
 			file.write(',')
-
+	file.close()
 
 
 ##############################
 # REMOVING DUPLICATE ENTRIES #
 ##############################
 
-skaterOutfile =  open('./data/skaterDB.txt', "w")
-skaterInfile = open('./data/skater.txt', "r")
+def removeDups(test):
 
-goalieOutfile =  open('./data/goalieDB.txt', "w")
-goalieInfile = open('./data/goalie.txt', "r")
+	if (test == "goalie"):
+		outfile = open('./data/goalieDB.txt', "w")
+		infile = open('./data/goalie.txt', "r")
+		namesSeen = set()
+		for line in infile:
+			name = list(line.strip().split(",", 8))[0]
+			if name not in namesSeen:
+				outfile.write(line)
+				namesSeen.add(name)
 
-
-def removeDups(infile, outfile):
-
-	namesSeen = set()
-
-	for line in infile:
-		name = list(line.strip().split(",", 14))[0]
-		print(name)
-		if name not in namesSeen:
-			outfile.write(line)
-			namesSeen.add(name)
+	elif (test == "skater"):
+		outfile = open('./data/skaterDB.txt', "w")
+		infile = open('./data/skater.txt', "r")
+		namesSeen = set()
+		for line in infile:
+			name = list(line.strip().split(",", 14))[0]
+			if name not in namesSeen:
+				outfile.write(line)
+				namesSeen.add(name)
 	outfile.close()
 
 
-scrape(skaterURL, skaterStats, skaterData)
-dataToTxt(skaterData, skaterFile)
-removeDups(skaterInfile, skaterOutfile)
+def skaters():
+	scrape(skaterURL, skaterStats, skaterData)
+	dataToTxt(skaterData, skaterFile)
+	removeDups("skater")
+
+def goalies():
+	scrape(goalieURL, goalieStats, goalieData)
+	dataToTxt(goalieData, goalieFile)
+	removeDups("goalie")
+
+goalies()
+
+
 
 ###############################
 # CONVERTING TEXT DOC TO JSON #
