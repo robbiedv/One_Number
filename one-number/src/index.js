@@ -69,18 +69,15 @@ function addGoalieStats() {
   }
 }
 
-addSkaterStats()
-addGoalieStats()
-
 /***
 Callback function for sorting players based
 on number of total stats in descending oder
 ***/
 
-let goofy = [1, 4]
+let callbackArr = [1, 4]
 
 function sortPlayers(a, b) {
-  for (let index in goofy) {
+  for (let index in callbackArr) {
     if (a[2] > b[2]) {
       return -1;
     } else if (b[2] > a[2]) {
@@ -91,10 +88,40 @@ function sortPlayers(a, b) {
   }
 }
 
+let oneNumber = []
+
+function skaterSpread(position) {
+  let one = position.sort(sortPlayers)[0][2];
+  let twenty = position.sort(sortPlayers)[20][2];
+  let spread = one - twenty;
+
+for ( let i = 0; i < position.length; i ++) {
+  position[i][2] += spread
+  oneNumber.push(position[i])
+}
+
+  console.log(one, twenty, spread)
+
+}
+
+  function allSkaterSpread() {
+  skaterSpread(leftW)
+  skaterSpread(rightW)
+  skaterSpread(center)
+  skaterSpread(defense)
+  }
+
+
+addSkaterStats()
+addGoalieStats()
+allSkaterSpread()
+
+
+
 let button = document.getElementById('button')
 
 button.addEventListener('click', function() {
-  console.log(goalies.sort(sortPlayers))
+  console.log(oneNumber.sort(sortPlayers))
 })
 
 // If you want your app to work offline and load faster, you can change
