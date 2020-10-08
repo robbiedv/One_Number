@@ -1,23 +1,12 @@
 import React from 'react';
-import './App.css';
+import './css/App.css';
+import './componants/main.js';
 import 'normalize.css';
+import Main from './componants/main'
 
 function App() {
   return (
-    <div className="App">
-        <div className="grid-container">
-          <h1 className="main-title">
-            1 Number
-          <br />
-          <span className="main-tag">
-              Draft Your Team
-          </span>
-          </h1>
-          <button id="button" type="submit">
-            START
-          </button>
-        </div>
-    </div>
+    <Main />
   );
 }
 
