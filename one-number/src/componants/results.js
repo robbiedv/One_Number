@@ -5,8 +5,14 @@ import "./../css/App.css";
 
 function Results() {
   return (
-    <h1>RESULTS!</h1>
-  )
+    <div className="results">
+      <div className="grid-container">
+        <h1 className="main-title">
+          Results!
+        </h1>
+      </div>
+    </div>
+  );
 }
 
 export default Results;

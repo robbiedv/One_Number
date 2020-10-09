@@ -122,11 +122,13 @@ function Main() {
           <br />
           <span className="main-tag">Draft Your Team</span>
         </h1>
-        <Link to="/results">
-          <button id="button" type="submit" onClick={clickHandler}>
-            START
-          </button>
-        </Link>
+        <div id="startButton">
+          <Link to="/results">
+            <button id="button" type="submit" onClick={clickHandler}>
+              START
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
