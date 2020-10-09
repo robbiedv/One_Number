@@ -1,19 +1,18 @@
-import React from 'react';
-import './../css/App.css';
-import skatersJSON from './../data/skaters.json';
-import goaliesJSON from './../data/goalies.json';
+import React from "react";
+import "./../css/App.css";
+import skatersJSON from "./../data/skaters.json";
+import goaliesJSON from "./../data/goalies.json";
+import { Link } from "react-router-dom";
 
 function Main() {
-
   /*******************
-  *** SORTING DATA ***
-  *******************/
-  let rightW = []
-  let leftW = []
-  let center = []
-  let defense = []
-  let goalies = []
-
+   *** SORTING DATA ***
+   *******************/
+  let rightW = [];
+  let leftW = [];
+  let center = [];
+  let defense = [];
+  let goalies = [];
 
   /***
   Adding each players stats together and pushing
@@ -37,13 +36,13 @@ function Main() {
       let pos = skatersJSON[player].Pos;
       stats = Math.round(stats / 10);
       if (pos === "RW") {
-        rightW.push([player, pos, stats])
+        rightW.push([player, pos, stats]);
       } else if (pos === "LW") {
-        leftW.push([player, pos, stats])
+        leftW.push([player, pos, stats]);
       } else if (pos === "C" || pos === "F") {
-        center.push([player, pos, stats])
+        center.push([player, pos, stats]);
       } else if (pos === "D") {
-        defense.push([player, pos, stats])
+        defense.push([player, pos, stats]);
       }
     }
   }
@@ -59,7 +58,7 @@ function Main() {
       stats += parseInt(goaliesJSON[player].SH * 50);
       let pos = goaliesJSON[player].Pos;
       stats = stats / 50;
-      goalies.push([player, pos, stats])
+      goalies.push([player, pos, stats]);
     }
   }
 
@@ -68,7 +67,7 @@ function Main() {
   on number of total stats in descending oder
   ***/
 
-  let callbackArr = [1, 4]
+  let callbackArr = [1, 4];
 
   function sortPlayers(a, b) {
     for (let index in callbackArr) {
@@ -82,58 +81,53 @@ function Main() {
     }
   }
 
-  let oneNumber = []
+  let oneNumber = [];
 
   function skaterSpread(position) {
     let one = position.sort(sortPlayers)[0][2];
     let twenty = position.sort(sortPlayers)[20][2];
     let spread = one - twenty;
 
-  for ( let i = 0; i < position.length; i ++) {
-    position[i][2] += spread
-    oneNumber.push(position[i])
-  }
-
-    console.log(one, twenty, spread)
-
-  }
-
-    function allSkaterSpread() {
-    skaterSpread(leftW)
-    skaterSpread(rightW)
-    skaterSpread(center)
-    skaterSpread(defense)
+    for (let i = 0; i < position.length; i++) {
+      position[i][2] += spread;
+      oneNumber.push(position[i]);
     }
 
-
-  addSkaterStats()
-  addGoalieStats()
-  allSkaterSpread()
-
-/*******************
-*** START BUTTON ***
-*******************/
-  function clickHandler() {
-    console.log(oneNumber.sort(sortPlayers))
+    console.log(one, twenty, spread);
   }
 
-/****************
-*** COMPONANT ***
-****************/
+  function allSkaterSpread() {
+    skaterSpread(leftW);
+    skaterSpread(rightW);
+    skaterSpread(center);
+    skaterSpread(defense);
+  }
+
+  addSkaterStats();
+  addGoalieStats();
+  allSkaterSpread();
+
+  /****************
+   *** COMPONANT ***
+   ****************/
+  function clickHandler() {
+    console.log(oneNumber.sort(sortPlayers));
+  }
+
   return (
     <div className="main">
-        <div className="grid-container">
-          <h1 className="main-title">
-            1 Number
+      <div className="grid-container">
+        <h1 className="main-title">
+          1 Number
           <br />
-          <span className="main-tag">
-              Draft Your Team
-          </span>
-          </h1>
+          <span className="main-tag">Draft Your Team</span>
+        </h1>
+        <Link to="/results">
           <button id="button" type="submit" onClick={clickHandler}>
             START
           </button>
-        </div>
+        </Link>
+      </div>
     </div>
   );
 }
