@@ -4,7 +4,8 @@ import './css/App.css';
 import './componants/main.js';
 import 'normalize.css';
 import Main from './componants/main';
-import Results from './componants/results.js';
+import Skaters from './componants/skaters.js';
+import Goalies from './componants/goalies.js';
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     <Router>
       <Switch>
         <Route path='/' exact component={Main}/>
-        <Route path='/results' component={Results}/>
+        <Route path='/skaters' component={Skaters}/>
+        <Route path='/goalies' component={Goalies}/>
       </Switch>
   </Router>
   );

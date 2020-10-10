@@ -110,9 +110,9 @@ function Main() {
   /****************
    *** COMPONANT ***
    ****************/
-  function clickHandler() {
-    console.log(oneNumber.sort(sortPlayers));
-  }
+  // function clickHandler() {
+  //   console.log(oneNumber.sort(sortPlayers));
+  // }
 
   return (
     <div className="main">
@@ -122,12 +122,21 @@ function Main() {
           <br />
           <span className="main-tag">Draft Your Team</span>
         </h1>
-        <div id="startButton">
-          <Link to="/results">
-            <button id="button" type="submit" onClick={clickHandler}>
-              START
-            </button>
-          </Link>
+        <div id="startButtonDiv">
+          <div id="goalieDiv">
+            <Link to="/goalies">
+              <button className="startButton" type="submit">
+                Goalies
+              </button>
+            </Link>
+          </div>
+          <div id="skaterDiv">
+            <Link to="/skaters">
+              <button className="startButton" type="submit">
+                Skaters
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
