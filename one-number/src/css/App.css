@@ -53,16 +53,18 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  box-shadow: 4px 8px black;
 }
 
 .startButton:hover {
-  box-shadow: 4px 8px black;
+  transform: scale(1.05);
   background-color:#d62828;
   transition: 0.1s;
+  cursor: pointer;
 }
 
 .startButton:active {
-  transform: scale(0.98);
+  transform: scale(1);
   transition: 0.001s;
 }
 
@@ -82,15 +84,16 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-}
-
-.statButton:active {
-  transform: scale(0.98);
-  transition: 0.0001s;
+  box-shadow: 4px 8px black;
 }
 
 .statButton:hover {
-  box-shadow: 4px 8px black;
+  transform: scale(1.05);
   transition: 0.1s;
   cursor: pointer;
+}
+
+.statButton:active {
+  transform: scale(1);
+  transition: 0.0001s;
 }

@@ -118,9 +118,9 @@ function Main() {
     <div className="main">
       <div className="grid-container">
         <h1 className="main-title">
-          1 Number
+          One Number
           <br />
-          <span className="main-tag">Draft Your Team</span>
+          <span className="main-tag">Draft Your Fantasy Hockey Team</span>
         </h1>
         <div id="startButtonDiv">
           <div id="goalieDiv">
