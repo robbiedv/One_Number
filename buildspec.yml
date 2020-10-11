@@ -3,41 +3,12 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Entered the install phase...
       - npm install
-  pre_build:
-    commands:
-      - echo Entered the pre_build phase...
   build:
     commands:
-      - echo Entered the build phase...
-      - echo Build started on `date`
-      - npm run build-prod
-  post_build:
-    commands:
-      - echo Entered the post_build phase...
-      - echo Build completed on `date`
-
-reports:
-  arn:aws:codebuild:us-east-1:916634888669:project/one_number:report-group/report-group-name-1:
-    files:
-      - "**/*"
-    base-directory: 'target/tests/reports'
-    discard-paths: no
-  reportGroupCucumberJson:
-    files:
-      - 'cucumber/target/cucumber-tests.xml'
-    discard-paths: yes
-    file-format: CUCUMBERJSON # default is JUNITXML
+      npm run build-prod
 artifacts:
   files:
-    - target/artifact-1.0.jar
-  discard-paths: yes
-  secondary-artifacts:
-    artifact1:
-      files:
-        - target/artifact-1.0.jar
-      discard-paths: yes
-cache:
-  paths:
-    - '/root/.m2/**/*'
+    - "**/*"
+  discard-paths: no
+  base-directory: src
