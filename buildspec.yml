@@ -3,8 +3,20 @@ version: 0.2
 phases:
   install:
     commands:
-      - npm install
-      - npm run build
+      - echo Installing Node ...
+      - curl -sL https://deb.nodesource.com/setup_12.x | bash -
+      - apt install -y nodejs
+      - echo Installing Yarn ...
+      - npm install -g yarn
+      - apt install --no-install-recommends yarn
+  pre_build:
+    commands:
+      - echo Installing dependencies ...
+      - yarn build-aws
+  build:
+    commands:
+      - echo Bulding ...
+      -
 artifacts:
   files:
     - "**/*"
