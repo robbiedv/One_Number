@@ -4,9 +4,9 @@ phases:
   install:
     commands:
       - npm install
-      - npm run build-prod
+      - npm run build
 artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: src
+  base-directory: dist
