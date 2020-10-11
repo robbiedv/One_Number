@@ -4,22 +4,15 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - apt-get update -y
       - npm install
-    finally:
-      - echo This always runs even if the update or install command fails
   pre_build:
     commands:
       - echo Entered the pre_build phase...
-    finally:
-      - echo This always runs even if the login command fails
   build:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
       - npm run-script build-prod
-    finally:
-      - echo This always runs even if the install command fails
   post_build:
     commands:
       - echo Entered the post_build phase...
@@ -38,7 +31,7 @@ reports:
     file-format: CUCUMBERJSON # default is JUNITXML
 artifacts:
   files:
-    - target/one-number.jar
+    - target/artifact-1.0.jar
   discard-paths: yes
   secondary-artifacts:
     artifact1:
