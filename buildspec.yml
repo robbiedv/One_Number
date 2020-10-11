@@ -6,19 +6,16 @@ phases:
       - echo Installing Node ...
       - curl -sL https://deb.nodesource.com/setup_12.x | bash -
       - apt install -y nodejs
-      - echo Installing Yarn ...
-      - npm install -g yarn
-      - apt install --no-install-recommends yarn
   pre_build:
     commands:
       - echo Installing dependencies ...
-      - yarn build-aws
+      - npm install
   build:
     commands:
       - echo Bulding ...
-      -
+      - npm build-prod
 artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: dist
+  base-directory: src
