@@ -12,7 +12,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - npm run-script build-prod
+      - npm run build-prod
   post_build:
     commands:
       - echo Entered the post_build phase...
