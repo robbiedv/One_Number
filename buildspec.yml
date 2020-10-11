@@ -13,7 +13,7 @@ phases:
   build:
     commands:
       - echo Bulding ...
-      - npm build
+      - npm run-script build
 artifacts:
   files:
     - "**/*"
