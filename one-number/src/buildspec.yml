@@ -1,0 +1,50 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - apt-get update -y
+      - npm install
+    finally:
+      - echo This always runs even if the update or install command fails
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+    finally:
+      - echo This always runs even if the login command fails
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      - npm run-script build-prod
+    finally:
+      - echo This always runs even if the install command fails
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
+
+reports:
+  arn:aws:codebuild:us-east-1:916634888669:project/one_number:report-group/report-group-name-1:
+    files:
+      - "**/*"
+    base-directory: 'target/tests/reports'
+    discard-paths: no
+  reportGroupCucumberJson:
+    files:
+      - 'cucumber/target/cucumber-tests.xml'
+    discard-paths: yes
+    file-format: CUCUMBERJSON # default is JUNITXML
+artifacts:
+  files:
+    - target/one-number.jar
+  discard-paths: yes
+  secondary-artifacts:
+    artifact1:
+      files:
+        - target/artifact-1.0.jar
+      discard-paths: yes
+cache:
+  paths:
+    - '/root/.m2/**/*'
