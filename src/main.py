@@ -38,7 +38,8 @@ def scrape (url, stats, data):
 	### LOOPING OVER DATA TO WRITE TO TXT FILE
 	for i in scrapedData:
 		# replacing spaces in name with underscore
-		data.append(i.text.replace(" ", "_"))
+		# data.append(i.text.replace(" ", "_"))
+		data.append(i.text)
 
 
 ###########################
