@@ -1,5 +1,5 @@
 import React from "react";
-import "./../css/App.css";
+import "./../css/App.scss";
 import skatersJSON from "./../data/skaters.json";
 
 function Skaters() {

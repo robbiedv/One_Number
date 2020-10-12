@@ -1,6 +1,5 @@
 import React from "react";
-import "./../css/App.css";
-import skatersJSON from "./../data/skaters.json";
+import "./../css/App.scss";
 import goaliesJSON from "./../data/goalies.json";
 
 function Goalies() {
