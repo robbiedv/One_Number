@@ -82,7 +82,7 @@ function Goalies() {
   return (
     <div className="goalies">
       <div className="grid-container">
-        <h1 className="main-title">Goalies</h1>
+        <h1 className="page-title">Goalies</h1>
         <button
           id="goalieButton"
           className="statButton"

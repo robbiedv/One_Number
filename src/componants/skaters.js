@@ -129,7 +129,7 @@ function Skaters() {
   return (
     <div className="skaters">
       <div className="grid-container">
-        <h1 className="main-title">Skaters</h1>
+        <h1 className="page-title">Skaters</h1>
         <button
           id="skaterButton"
           className="statButton"
