@@ -87,7 +87,19 @@ function Skaters() {
    ***********************/
 
   function displayRankings() {
-    for (let i = 0; i < 500; i++) {
+    let table = document.getElementById("skaterTable");
+    let row = table.insertRow(0);
+    let rank = row.insertCell(0);
+    let player = row.insertCell(1);
+    let pos = row.insertCell(2);
+    let num = row.insertCell(3);
+
+    rank.innerHTML = "Rank";
+    player.innerHTML = "Player";
+    pos.innerHTML = "Pos";
+    num.innerHTML = "Score"
+
+    for (let i = 1; i < 501; i++) {
       let table = document.getElementById("skaterTable");
       let row = table.insertRow(i);
       let rank = row.insertCell(0);
@@ -95,10 +107,10 @@ function Skaters() {
       let pos = row.insertCell(2);
       let num = row.insertCell(3);
 
-      rank.innerHTML = i + 1;
-      player.innerHTML = oneNumber.sort(sortPlayers)[i][0];
-      pos.innerHTML = oneNumber.sort(sortPlayers)[i][1];
-      num.innerHTML = oneNumber.sort(sortPlayers)[i][2];
+      rank.innerHTML = i;
+      player.innerHTML = oneNumber.sort(sortPlayers)[i-1][0];
+      pos.innerHTML = oneNumber.sort(sortPlayers)[i-1][1];
+      num.innerHTML = oneNumber.sort(sortPlayers)[i-1][2];
     }
   }
 
@@ -111,7 +123,7 @@ function Skaters() {
     x.style.display = "none";
     addSkaterStats();
     allSkaterSpread();
-    setTimeout(displayRankings, 10)
+    setTimeout(displayRankings, 10);
   }
 
   return (
