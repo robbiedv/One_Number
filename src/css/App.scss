@@ -88,6 +88,7 @@ $background: #020607;
 /******************
 *** SKATER PAGE ***
 ******************/
+
 .statButton {
   grid-column: 1 / -1;
   grid-row: 1;
@@ -133,6 +134,11 @@ th, td {
 }
 
 tr:hover {
+  background-color: $neon;
+  color: $black;
+}
+
+tr:first-child {
   background-color: $neon;
   color: $black;
 }

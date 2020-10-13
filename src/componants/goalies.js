@@ -46,16 +46,27 @@ function Goalies() {
   }
 
   function displayRankings() {
-    for (let i = 0; i < goalies.length; i++) {
+
+    let table = document.getElementById("goalieTable");
+    let row = table.insertRow(0);
+    let rank = row.insertCell(0);
+    let player = row.insertCell(1);
+    let num = row.insertCell(2);
+
+    rank.innerHTML = "Rank";
+    player.innerHTML = "Player";
+    num.innerHTML = "Score"
+
+    for (let i = 1; i < goalies.length + 1; i++) {
       let table = document.getElementById("goalieTable");
       let row = table.insertRow(i);
       let rank = row.insertCell(0);
       let player = row.insertCell(1);
       let num = row.insertCell(2);
 
-      rank.innerHTML = i + 1;
-      player.innerHTML = goalies.sort(sortGoalies)[i][0];
-      num.innerHTML = goalies.sort(sortGoalies)[i][2];
+      rank.innerHTML = i;
+      player.innerHTML = goalies.sort(sortGoalies)[i-1][0];
+      num.innerHTML = goalies.sort(sortGoalies)[i-1][2];
     }
   }
 
