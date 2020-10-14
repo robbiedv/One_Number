@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./css/App.scss";
-import "./componants/main.js";
+import "./components/main.js";
 import "normalize.css";
-import Main from "./componants/main";
-import Skaters from "./componants/skaters.js";
-import Goalies from "./componants/goalies.js";
+import Main from "./components/main";
+import Skaters from "./components/skaters.js";
+import Goalies from "./components/goalies.js";
 
 function App() {
   return (

@@ -1,21 +1,18 @@
 import React from "react";
 import "./../css/App.scss";
 import { Link } from "react-router-dom";
+import Nav from "./nav.js";
 
 function Main() {
-
   return (
     <div className="main">
       <div className="grid-container">
-        <h1 className="main-title">
-          One Number
-          <br />
-          <span className="main-tag">Draft Your Team</span>
-        </h1>
-        <p className="explain">
-          Players are ranked to determine their draft value at each position.
-          High ranking players may not be the best players, but they are the most rare, making them more valuable during a draft.
-        </p>
+        <Nav />
+        <h1 className="main-title">One Number</h1>
+        <h2 className="main-tag">
+          a draft assistant tool that ranks NHL players based on their fantasy
+          league value
+        </h2>
         <div id="startButtonDiv">
           <div id="goalieDiv">
             <Link to="/goalies">
