@@ -113,6 +113,8 @@ function Skaters() {
       pos.innerHTML = oneNumber.sort(sortPlayers)[i - 1][1];
       num.innerHTML = oneNumber.sort(sortPlayers)[i - 1][2];
     }
+    //called here so that event listener can be attached to each tr
+    displayPlayer();
   }
 
   /*************************
@@ -140,7 +142,7 @@ function Skaters() {
    *** COMPONANT ***
    ****************/
 
-  function clickHandler() {
+  function displayTable() {
     let x = document.getElementById("skaterButton");
     x.style.display = "none";
     loading();
@@ -148,6 +150,16 @@ function Skaters() {
     allSkaterSpread();
     setTimeout(displayRankings, 5500);
   }
+
+
+function displayPlayer() {
+  let tr = document.getElementsByTagName("TR")
+  for (let i = 1; i < tr.length; i++) {
+    tr[i].onclick = function() {
+      console.log(tr[i].innerText)
+    }
+  }
+}
 
   return (
     <div className="stats-page">
@@ -158,7 +170,7 @@ function Skaters() {
           id="skaterButton"
           className="statButton"
           type="submit"
-          onClick={clickHandler}
+          onClick={displayTable}
         >
           Get Draft Rankings
         </button>
