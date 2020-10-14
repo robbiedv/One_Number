@@ -1,6 +1,7 @@
 import React from "react";
 import "./../css/App.scss";
 import skatersJSON from "./../data/skaters.json";
+import "./../css/animations.scss";
 
 function Skaters() {
   /*******************
@@ -85,7 +86,6 @@ function Skaters() {
   /***********************
    *** DISPLAY RANKINGS ***
    ***********************/
-
   function displayRankings() {
     let table = document.getElementById("skaterTable");
     let row = table.insertRow(0);
@@ -114,6 +114,26 @@ function Skaters() {
     }
   }
 
+  /*************************
+   *** LOADING ANIMATION ***
+   ************************/
+   function loading() {
+     let load1 = document.getElementById("load-1").classList
+     let load2 = document.getElementById("load-2").classList
+     let load3 = document.getElementById("load-3").classList
+
+     setTimeout(function() {
+       load1.add("loading1")}, 500);
+
+     setTimeout(function() {
+     load2.add("loading2")}, 3000);
+
+     setTimeout(function() {
+       load3.add("loading3")}, 5500);
+   }
+
+
+
   /****************
    *** COMPONANT ***
    ****************/
@@ -121,13 +141,14 @@ function Skaters() {
   function clickHandler() {
     let x = document.getElementById("skaterButton");
     x.style.display = "none";
+    loading();
     addSkaterStats();
     allSkaterSpread();
-    setTimeout(displayRankings, 10);
+    setTimeout(displayRankings, 5500);
   }
 
   return (
-    <div className="skaters">
+    <div className="stats-page">
       <div className="grid-container">
         <h1 className="page-title">Skaters</h1>
         <button
@@ -138,6 +159,11 @@ function Skaters() {
         >
           Get Draft Rankings
         </button>
+        <div className="loading-anim">
+          <p id="load-1">Getting Data</p>
+          <p id="load-2">Calculating Score</p>
+          <p id="load-3">Ranking Players</p>
+        </div>
         <table id="skaterTable"></table>
       </div>
     </div>

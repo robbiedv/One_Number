@@ -1,6 +1,7 @@
 import React from "react";
 import "./../css/App.scss";
 import goaliesJSON from "./../data/goalies.json";
+import "./../css/animations.scss";
 
 function Goalies() {
   /*******************
@@ -46,7 +47,6 @@ function Goalies() {
   }
 
   function displayRankings() {
-
     let table = document.getElementById("goalieTable");
     let row = table.insertRow(0);
     let rank = row.insertCell(0);
@@ -55,7 +55,7 @@ function Goalies() {
 
     rank.innerHTML = "Rank";
     player.innerHTML = "Player";
-    num.innerHTML = "Score"
+    num.innerHTML = "Score";
 
     for (let i = 1; i < goalies.length + 1; i++) {
       let table = document.getElementById("goalieTable");
@@ -65,9 +65,30 @@ function Goalies() {
       let num = row.insertCell(2);
 
       rank.innerHTML = i;
-      player.innerHTML = goalies.sort(sortGoalies)[i-1][0];
-      num.innerHTML = goalies.sort(sortGoalies)[i-1][2];
+      player.innerHTML = goalies.sort(sortGoalies)[i - 1][0];
+      num.innerHTML = goalies.sort(sortGoalies)[i - 1][2];
     }
+  }
+
+  /*************************
+   *** LOADING ANIMATION ***
+   ************************/
+  function loading() {
+    let load1 = document.getElementById("load-1").classList;
+    let load2 = document.getElementById("load-2").classList;
+    let load3 = document.getElementById("load-3").classList;
+
+    setTimeout(function () {
+      load1.add("loading1");
+    }, 500);
+
+    setTimeout(function () {
+      load2.add("loading2");
+    }, 3000);
+
+    setTimeout(function () {
+      load3.add("loading3");
+    }, 5500);
   }
 
   /****************
@@ -76,11 +97,12 @@ function Goalies() {
   function clickHandler() {
     let x = document.getElementById("goalieButton");
     x.style.display = "none";
+    loading();
     addGoalieStats();
-    setTimeout(displayRankings, 2000)
+    setTimeout(displayRankings, 8000);
   }
   return (
-    <div className="goalies">
+    <div className="stats-page">
       <div className="grid-container">
         <h1 className="page-title">Goalies</h1>
         <button
@@ -91,6 +113,11 @@ function Goalies() {
         >
           Get Draft Rankings
         </button>
+        <div className="loading-anim">
+          <p id="load-1">Getting Data</p>
+          <p id="load-2">Calculating Score</p>
+          <p id="load-3">Ranking Players</p>
+        </div>
         <table id="goalieTable"></table>
       </div>
     </div>
