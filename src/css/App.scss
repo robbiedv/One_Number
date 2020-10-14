@@ -219,8 +219,17 @@ tr:first-child {
 
 @media only screen and (max-width: 750px) {
 
-  .explain {
-    padding: 1% 5%;
+  .navButton {
+    width: 45px;
+    height: 45px;
+    margin: 5%;
+  }
+
+  .main-title {
+    margin-top: 5% !important;
+  }
+
+  .main-tag {
     align-self: end;
   }
 
@@ -230,7 +239,7 @@ tr:first-child {
   }
 
   .startButton {
-    margin: 3%;
+    margin: 8% 3%;
   }
 
   .statButton {
