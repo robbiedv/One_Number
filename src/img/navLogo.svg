@@ -25,7 +25,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="-47.068793"
-     inkscape:cy="55.416637"
+     inkscape:cy="-5.1925153"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,26 +64,22 @@
        x="28.826487"
        y="90.797104"
        ry="0" />
-    <g
-       id="g2171"
-       transform="translate(0.58403054,0.58403015)">
-      <path
-         style="fill:#eeeeee;fill-opacity:1;stroke-width:0.0536526"
-         d="m 32.394099,99.219943 v -2.468016 h -0.511576 -0.511575 l 0.01529,-0.539938 0.01529,-0.53994 0.613845,-0.264849 0.613844,-0.264849 h 0.714055 0.714056 v 3.272802 3.272807 H 33.225714 32.3941 Z"
-         id="path1013"
-         sodipodi:nodetypes="ccccccccccccccc" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.62999px;line-height:1.25;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#f1fa3d;fill-opacity:1;stroke:#f1fa3d;stroke-width:0.273985;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="38.230518"
-         y="101.60825"
-         id="text1017"><tspan
-           sodipodi:role="line"
-           id="tspan1015"
-           x="38.230518"
-           y="101.60825"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.62999px;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f1fa3d;fill-opacity:1;stroke:#f1fa3d;stroke-width:0.273985;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">#</tspan></text>
-    </g>
+    <path
+       style="fill:#eeeeee;fill-opacity:1;stroke-width:0.0536526"
+       d="m 32.97813,99.803973 v -2.468016 h -0.511576 -0.511575 l 0.01529,-0.539938 0.01529,-0.53994 0.613845,-0.264849 0.613844,-0.264849 h 0.714055 0.714056 v 3.272802 3.272807 h -0.831614 -0.831614 z"
+       id="path1013"
+       sodipodi:nodetypes="ccccccccccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.62999px;line-height:1.25;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#f1fa3c;fill-opacity:1;stroke:#f1fa3c;stroke-width:0.273985;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       x="38.814548"
+       y="102.19228"
+       id="text1017"><tspan
+         sodipodi:role="line"
+         id="tspan1015"
+         x="38.814548"
+         y="102.19228"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.62999px;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f1fa3c;fill-opacity:1;stroke:#f1fa3c;stroke-width:0.273985;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;">#</tspan></text>
     <rect
        style="fill:#eeeeee;fill-opacity:1;stroke-width:0.315034;stroke-linecap:square"
        id="rect877"
@@ -92,7 +88,7 @@
        x="-31.784626"
        y="34.611595" />
     <rect
-       style="fill:#f1fa3d;fill-opacity:1;stroke-width:0.315034;stroke-linecap:square"
+       style="fill:#f1fa3c;fill-opacity:1;stroke-width:0.315034;stroke-linecap:square"
        id="rect885"
        width="17.609646"
        height="17.609646"
