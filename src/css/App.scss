@@ -24,6 +24,31 @@ $background: #020607;
   background-image: url("../img/background.svg");
 }
 
+.nav {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  align-self: start;
+  padding: 10%;
+}
+
+.navButton {
+  width: 62px;
+  height: 62px;
+  display: block;
+  background-repeat: no-repeat;
+  border: none;
+  text-decoration: none;
+  background-image: url("../img/navLogo.svg");
+  background-color: $background;
+  background-size: 100%;
+}
+
+.navButton:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
+  cursor: pointer;
+}
+
 .main-title {
   font-size: 4em;
   margin: 0 !important;

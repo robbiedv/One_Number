@@ -2,6 +2,7 @@ import React from "react";
 import "./../css/App.scss";
 import skatersJSON from "./../data/skaters.json";
 import "./../css/animations.scss";
+import Nav from "./nav.js";
 
 function Skaters() {
   /*******************
@@ -97,7 +98,7 @@ function Skaters() {
     rank.innerHTML = "Rank";
     player.innerHTML = "Player";
     pos.innerHTML = "Pos";
-    num.innerHTML = "Score"
+    num.innerHTML = "Score";
 
     for (let i = 1; i < 501; i++) {
       let table = document.getElementById("skaterTable");
@@ -108,31 +109,32 @@ function Skaters() {
       let num = row.insertCell(3);
 
       rank.innerHTML = i;
-      player.innerHTML = oneNumber.sort(sortPlayers)[i-1][0];
-      pos.innerHTML = oneNumber.sort(sortPlayers)[i-1][1];
-      num.innerHTML = oneNumber.sort(sortPlayers)[i-1][2];
+      player.innerHTML = oneNumber.sort(sortPlayers)[i - 1][0];
+      pos.innerHTML = oneNumber.sort(sortPlayers)[i - 1][1];
+      num.innerHTML = oneNumber.sort(sortPlayers)[i - 1][2];
     }
   }
 
   /*************************
    *** LOADING ANIMATION ***
    ************************/
-   function loading() {
-     let load1 = document.getElementById("load-1").classList
-     let load2 = document.getElementById("load-2").classList
-     let load3 = document.getElementById("load-3").classList
+  function loading() {
+    let load1 = document.getElementById("load-1").classList;
+    let load2 = document.getElementById("load-2").classList;
+    let load3 = document.getElementById("load-3").classList;
 
-     setTimeout(function() {
-       load1.add("loading1")}, 500);
+    setTimeout(function () {
+      load1.add("loading1");
+    }, 500);
 
-     setTimeout(function() {
-     load2.add("loading2")}, 3000);
+    setTimeout(function () {
+      load2.add("loading2");
+    }, 3000);
 
-     setTimeout(function() {
-       load3.add("loading3")}, 5500);
-   }
-
-
+    setTimeout(function () {
+      load3.add("loading3");
+    }, 5500);
+  }
 
   /****************
    *** COMPONANT ***
@@ -150,6 +152,7 @@ function Skaters() {
   return (
     <div className="stats-page">
       <div className="grid-container">
+        <Nav />
         <h1 className="page-title">Skaters</h1>
         <button
           id="skaterButton"
@@ -160,9 +163,9 @@ function Skaters() {
           Get Draft Rankings
         </button>
         <div className="loading-anim">
-          <p id="load-1">Getting Data</p>
-          <p id="load-2">Calculating Score</p>
-          <p id="load-3">Ranking Players</p>
+          <p id="load-1">Getting Data . . .</p>
+          <p id="load-2">Calculating Score . . .</p>
+          <p id="load-3">Ranking Players . . .</p>
         </div>
         <table id="skaterTable"></table>
       </div>

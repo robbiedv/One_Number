@@ -2,6 +2,7 @@ import React from "react";
 import "./../css/App.scss";
 import goaliesJSON from "./../data/goalies.json";
 import "./../css/animations.scss";
+import Nav from "./nav.js";
 
 function Goalies() {
   /*******************
@@ -104,6 +105,7 @@ function Goalies() {
   return (
     <div className="stats-page">
       <div className="grid-container">
+        <Nav />
         <h1 className="page-title">Goalies</h1>
         <button
           id="goalieButton"
@@ -114,9 +116,9 @@ function Goalies() {
           Get Draft Rankings
         </button>
         <div className="loading-anim">
-          <p id="load-1">Getting Data</p>
-          <p id="load-2">Calculating Score</p>
-          <p id="load-3">Ranking Players</p>
+          <p id="load-1">Getting Data . . .</p>
+          <p id="load-2">Calculating Score . . .</p>
+          <p id="load-3">Ranking Players . . .</p>
         </div>
         <table id="goalieTable"></table>
       </div>
