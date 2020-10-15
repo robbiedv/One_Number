@@ -221,12 +221,15 @@ td {
 }
 
 #display-player {
+  // display: none;
+  position: sticky;
+  top: ;
   grid-column: 1 / -1;
   justify-self: center;
   width: 80vw;
   height: 40vh;
   background-color: #000;
-  z-index: 1;
+  z-index: 20;
   font-family: "Exo", sans-serif;
 }
 

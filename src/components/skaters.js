@@ -139,10 +139,9 @@ function Skaters() {
     }, 5500);
   }
 
-  /****************
-   *** COMPONANT ***
-   ****************/
-
+/********************
+*** DISPLAY TABLE ***
+********************/
   function displayTable() {
     let x = document.getElementById("skater-button");
     x.style.display = "none";
@@ -152,7 +151,12 @@ function Skaters() {
     setTimeout(displayRankings, 5500);
   }
 
+
+/*********************
+*** DISPLAY PLAYER ***
+*********************/
   function displayPlayer() {
+  
     let statName = [
       "Pos",
       "GP",
@@ -178,7 +182,6 @@ function Skaters() {
         let trNodes = trColl.childNodes;
         let name = trNodes[1].innerText;
         statCardName.innerText = name;
-        console.log(skatersJSON[name]);
 
         let table = document.getElementById("stat-card-table");
         let header = table.createTHead();
@@ -202,6 +205,9 @@ function Skaters() {
     }
   }
 
+  /****************
+   *** COMPONANT ***
+   ****************/
   return (
     <div className="stats-page">
       <div className="grid-container">
@@ -222,7 +228,7 @@ function Skaters() {
         </div>
         <table id="skater-table" className="main-table"></table>
         <div id="display-player">
-          <h1 id="stat-card-name"></h1>
+          <h1 id="stat-card-name"> </h1>
           <table id="stat-card-table"></table>
         </div>
       </div>
