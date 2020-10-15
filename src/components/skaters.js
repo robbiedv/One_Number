@@ -156,12 +156,13 @@ function Skaters() {
     let statName = ["Pos", "GP", "G", "A", "P", "PM", "PPG", "PPA", "S", "Blk", "H", "FW"]
     let tr = document.getElementsByTagName("TR");
 
+/*** MATCHING SELECTED PLAYER TO DATABASE ***/
     for (let i = 1; i < tr.length; i++) {
       tr[i].onclick = function () {
-        let x = tr[i];
-        let y = x.childNodes;
-        let name = y[1].innertext;
-        console.log(skatersJSON.name);
+        let trColl = tr[i];
+        let trNodes = trColl.childNodes;
+        let name = trNodes[1].innerText
+        console.log(skatersJSON[name]);
 
         let table = document.getElementById("stat-card-table");
         let header = table.insertRow(0);
