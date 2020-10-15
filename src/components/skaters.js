@@ -153,28 +153,54 @@ function Skaters() {
   }
 
   function displayPlayer() {
-    let statName = ["Pos", "GP", "G", "A", "P", "PM", "PPG", "PPA", "S", "Blk", "H", "FW"]
-    let tr = document.getElementsByTagName("TR");
+    let statName = [
+      "Pos",
+      "GP",
+      "G",
+      "A",
+      "P",
+      "PM",
+      "PPG",
+      "PPA",
+      "S",
+      "Blk",
+      "H",
+      "FW",
+    ];
 
-/*** MATCHING SELECTED PLAYER TO DATABASE ***/
+    let tr = document.getElementsByTagName("TR");
+    let statCardName = document.getElementById("stat-card-name");
+
+    /*** MATCHING SELECTED PLAYER TO DATABASE ***/
     for (let i = 1; i < tr.length; i++) {
       tr[i].onclick = function () {
         let trColl = tr[i];
         let trNodes = trColl.childNodes;
-        let name = trNodes[1].innerText
+        let name = trNodes[1].innerText;
+        statCardName.innerText = name;
         console.log(skatersJSON[name]);
 
         let table = document.getElementById("stat-card-table");
-        let header = table.insertRow(0);
+        let header = table.createTHead();
+        let headerRow = header.insertRow(0);
+        let year1 = table.insertRow(1);
 
         for (let i = 0; i < 12; i++) {
-          let x = header.insertCell(i)
-          x.innerHTML = statName[i]
+          //INSERTING STAT HEADERS
+          let x = headerRow.insertCell(i);
+          x.innerHTML = statName[i];
+          //INSERTING STATS
+          let y = year1.insertCell(i);
+          //ACCESSING STATS FROM JSON USING STATNAME ARRAY
+          if (skatersJSON[name][statName[i]] === undefined) {
+            y.innerHTML = 0;
+          } else {
+            y.innerHTML = skatersJSON[name][statName[i]];
+          }
         }
       };
     }
   }
-
 
   return (
     <div className="stats-page">
@@ -196,7 +222,7 @@ function Skaters() {
         </div>
         <table id="skater-table" className="main-table"></table>
         <div id="display-player">
-          <h1 id="stat-card-name">Patrick Kane</h1>
+          <h1 id="stat-card-name"></h1>
           <table id="stat-card-table"></table>
         </div>
       </div>
