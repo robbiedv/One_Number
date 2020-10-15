@@ -88,7 +88,7 @@ function Skaters() {
    *** DISPLAY RANKINGS ***
    ***********************/
   function displayRankings() {
-    let table = document.getElementById("skaterTable");
+    let table = document.getElementById("skater-table");
     let row = table.insertRow(0);
     let rank = row.insertCell(0);
     let player = row.insertCell(1);
@@ -101,13 +101,14 @@ function Skaters() {
     num.innerHTML = "Score";
 
     for (let i = 1; i < 501; i++) {
-      let table = document.getElementById("skaterTable");
+      let table = document.getElementById("skater-table");
       let row = table.insertRow(i);
       let rank = row.insertCell(0);
       let player = row.insertCell(1);
       let pos = row.insertCell(2);
       let num = row.insertCell(3);
 
+      //counting with i to create ranking
       rank.innerHTML = i;
       player.innerHTML = oneNumber.sort(sortPlayers)[i - 1][0];
       pos.innerHTML = oneNumber.sort(sortPlayers)[i - 1][1];
@@ -143,7 +144,7 @@ function Skaters() {
    ****************/
 
   function displayTable() {
-    let x = document.getElementById("skaterButton");
+    let x = document.getElementById("skater-button");
     x.style.display = "none";
     loading();
     addSkaterStats();
@@ -151,15 +152,28 @@ function Skaters() {
     setTimeout(displayRankings, 5500);
   }
 
+  function displayPlayer() {
+    let statName = ["Pos", "GP", "G", "A", "P", "PM", "PPG", "PPA", "S", "Blk", "H", "FW"]
+    let tr = document.getElementsByTagName("TR");
 
-function displayPlayer() {
-  let tr = document.getElementsByTagName("TR")
-  for (let i = 1; i < tr.length; i++) {
-    tr[i].onclick = function() {
-      console.log(tr[i].innerText)
+    for (let i = 1; i < tr.length; i++) {
+      tr[i].onclick = function () {
+        let x = tr[i];
+        let y = x.childNodes;
+        let name = y[1].innertext;
+        console.log(skatersJSON.name);
+
+        let table = document.getElementById("stat-card-table");
+        let header = table.insertRow(0);
+
+        for (let i = 0; i < 12; i++) {
+          let x = header.insertCell(i)
+          x.innerHTML = statName[i]
+        }
+      };
     }
   }
-}
+
 
   return (
     <div className="stats-page">
@@ -167,8 +181,8 @@ function displayPlayer() {
         <Nav />
         <h1 className="page-title">Skaters</h1>
         <button
-          id="skaterButton"
-          className="statButton"
+          id="skater-button"
+          className="stat-button"
           type="submit"
           onClick={displayTable}
         >
@@ -179,7 +193,11 @@ function displayPlayer() {
           <p id="load-2">Calculating Score . . .</p>
           <p id="load-3">Ranking Players . . .</p>
         </div>
-        <table id="skaterTable"></table>
+        <table id="skater-table" className="main-table"></table>
+        <div id="display-player">
+          <h1 id="stat-card-name">Patrick Kane</h1>
+          <table id="stat-card-table"></table>
+        </div>
       </div>
     </div>
   );
