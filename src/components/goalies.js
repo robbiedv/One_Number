@@ -48,7 +48,7 @@ function Goalies() {
   }
 
   function displayRankings() {
-    let table = document.getElementById("goalieTable");
+    let table = document.getElementById("goalie-table");
     let row = table.insertRow(0);
     let rank = row.insertCell(0);
     let player = row.insertCell(1);
@@ -59,7 +59,7 @@ function Goalies() {
     num.innerHTML = "Score";
 
     for (let i = 1; i < goalies.length + 1; i++) {
-      let table = document.getElementById("goalieTable");
+      let table = document.getElementById("goalie-table");
       let row = table.insertRow(i);
       let rank = row.insertCell(0);
       let player = row.insertCell(1);
@@ -69,6 +69,7 @@ function Goalies() {
       player.innerHTML = goalies.sort(sortGoalies)[i - 1][0];
       num.innerHTML = goalies.sort(sortGoalies)[i - 1][2];
     }
+    displayPlayer();
   }
 
   /*************************
@@ -92,11 +93,80 @@ function Goalies() {
     }, 5500);
   }
 
+  /***************************
+  *** DISPLAY PLAYER STATS ***
+  ***************************/
+    function displayPlayer() {
+      /*** CONFIGUREING DISPLAY OF STATS ***/
+      let playerStats = document.getElementById("display-player")
+      let viewport = window.pageYOffset;
+      //player stats apper at the top of the viewport
+      playerStats.style.padding = viewport;
+
+      /*** CONFIGUREING INSERTION OF STATS ***/
+      let tr = document.getElementsByTagName("TR");
+      let statCardName = document.getElementById("stat-card-name");
+
+      let statName = [
+        "GS",
+        "W",
+        "GA",
+        "SV",
+        "SV-PCT",
+        "SH"
+      ];
+
+      /*** MATCHING SELECTED PLAYER TO DATABASE ***/
+      for (let i = 1; i < tr.length; i++) {
+        tr[i].onclick = function () {
+          playerStats.style.display = "block";
+          let trCollection = tr[i];
+          let trNodes = trCollection.childNodes;
+          // let pos = trNodes[2].innerText;
+          let name = trNodes[1].innerText;
+          // push player name and pos to h1
+          statCardName.innerText = name;
+
+          let table = document.getElementById("stat-card-table");
+          let header = table.createTHead();
+          let headerRow = header.insertRow(0);
+          let year1 = table.insertRow(1);
+
+          for (let i = 0; i < statName.length; i++) {
+            //inserting stat header
+            let x = headerRow.insertCell(i);
+            x.innerHTML = statName[i];
+            //inserting stats
+            let y = year1.insertCell(i);
+            //accessing stats from JSON using statName array
+            if (goaliesJSON[name][statName[i]] === undefined) {
+              y.innerHTML = 0;
+            } else {
+              y.innerHTML = goaliesJSON[name][statName[i]];
+            }
+          }
+        };
+      }
+    }
+
+    function closePlayerStats() {
+      //close player stats window
+      let playerStats = document.getElementById("display-player")
+      playerStats.style.display = "none";
+
+      //clear player data from table
+      let table = document.getElementById("stat-card-table");
+      table.deleteTHead();
+      for (let i = 0; i < table.length; i++) {
+        table.deleteRow(i)
+      }
+    }
+
   /****************
    *** COMPONANT ***
    ****************/
   function clickHandler() {
-    let x = document.getElementById("goalieButton");
+    let x = document.getElementById("goalie-button");
     x.style.display = "none";
     loading();
     addGoalieStats();
@@ -108,8 +178,8 @@ function Goalies() {
         <Nav />
         <h1 className="page-title">Goalies</h1>
         <button
-          id="goalieButton"
-          className="statButton"
+          id="goalie-button"
+          className="stat-button"
           type="submit"
           onClick={clickHandler}
         >
@@ -120,7 +190,12 @@ function Goalies() {
           <p id="load-2">Calculating Score . . .</p>
           <p id="load-3">Ranking Players . . .</p>
         </div>
-        <table id="goalieTable" className="main-table"></table>
+        <table id="goalie-table" className="main-table"></table>
+          <div id="display-player">
+            <span id="exit-button" onClick={closePlayerStats}></span>
+            <h1 id="stat-card-name"> </h1>
+            <table id="stat-card-table"></table>
+          </div>
       </div>
     </div>
   );

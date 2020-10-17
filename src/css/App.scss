@@ -71,7 +71,7 @@ $background: #020607;
   user-select: none;
 }
 
-#startButtonDiv {
+#start-button-div {
   grid-column: 1 / -1;
   grid-row: 2;
   align-self: start;
@@ -80,7 +80,7 @@ $background: #020607;
   justify-content: space-around;
 }
 
-.startButton {
+.start-button {
   border: 1px solid #f4fd49;
   background-color: $neon;
   color: $black;
@@ -92,14 +92,14 @@ $background: #020607;
   font-family: "Exo", sans-serif;
 }
 
-.startButton:hover {
+.start-button:hover {
   transform: scale(1.05);
   transition: 0.1s;
   cursor: pointer;
   box-shadow: 0 0 6px #f8ff33;
 }
 
-.startButton:active {
+.start-button:active {
   transform: scale(1);
   transition: 0.001s;
 }
@@ -109,6 +109,7 @@ $background: #020607;
 ******************/
 .stats-page {
   overflow-x: hidden;
+  user-select: none;
 }
 
 .page-title {
@@ -170,7 +171,7 @@ $background: #020607;
   opacity: 0;
 }
 
-#skater-table {
+.main-table {
   grid-column: 1 / -1;
   grid-row-start: 2;
   justify-self: center;
@@ -181,19 +182,7 @@ $background: #020607;
   margin: 2%;
 }
 
-#goalieTable {
-  grid-column: 1 / -1;
-  grid-row-start: 2;
-  justify-self: center;
-  align-self: start;
-  border-collapse: collapse;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  margin: 2%;
-}
-
-#skater-table th,
-td {
+.main-table th, td {
   border-bottom: 2px solid #f1fa3c;
   border-spacing: 5px;
   padding: 15px;
@@ -202,20 +191,20 @@ td {
   font-size: 1.2em;
 }
 
-#skater-table tr:hover {
+.main-table tr:hover {
   background-color: #f1fa3c;
   color: #000;
   cursor: pointer;
 }
 
 @media only screen and (min-width: 751px) {
-  #skater-table tr:hover {
+  .main-table tr:hover {
     transform: scale3d(1.2, 1.2, 1.2);
     box-shadow: 0 0 4px #f8ff33;
   }
 }
 
-#skater-table tr:first-child {
+.main-table tr:first-child {
   background-color: #f1fa3c;
   color: #000;
 }
@@ -250,6 +239,10 @@ td {
   background-color: #000;
   z-index: 20;
   font-family: "Exo", sans-serif;
+}
+
+#stat-card-name {
+  font-size: 2.5em;
 }
 
 #stat-card-table {
