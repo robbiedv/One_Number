@@ -88,7 +88,7 @@ function Skaters() {
    *** DISPLAY RANKINGS ***
    ***********************/
   function displayRankings() {
-    let table = document.getElementById("skaterTable");
+    let table = document.getElementById("skater-table");
     let row = table.insertRow(0);
     let rank = row.insertCell(0);
     let player = row.insertCell(1);
@@ -101,18 +101,21 @@ function Skaters() {
     num.innerHTML = "Score";
 
     for (let i = 1; i < 501; i++) {
-      let table = document.getElementById("skaterTable");
+      let table = document.getElementById("skater-table");
       let row = table.insertRow(i);
       let rank = row.insertCell(0);
       let player = row.insertCell(1);
       let pos = row.insertCell(2);
       let num = row.insertCell(3);
 
+      //counting with i to create ranking
       rank.innerHTML = i;
       player.innerHTML = oneNumber.sort(sortPlayers)[i - 1][0];
       pos.innerHTML = oneNumber.sort(sortPlayers)[i - 1][1];
       num.innerHTML = oneNumber.sort(sortPlayers)[i - 1][2];
     }
+    //called here so that event listener can be attached to each tr
+    displayPlayer();
   }
 
   /*************************
@@ -136,12 +139,11 @@ function Skaters() {
     }, 5500);
   }
 
-  /****************
-   *** COMPONANT ***
-   ****************/
-
-  function clickHandler() {
-    let x = document.getElementById("skaterButton");
+/********************
+*** DISPLAY TABLE ***
+********************/
+  function displayTable() {
+    let x = document.getElementById("skater-button");
     x.style.display = "none";
     loading();
     addSkaterStats();
@@ -149,16 +151,95 @@ function Skaters() {
     setTimeout(displayRankings, 5500);
   }
 
+
+/***************************
+*** DISPLAY PLAYER STATS ***
+***************************/
+  function displayPlayer() {
+    /*** CONFIGUREING DISPLAY OF STATS ***/
+    let playerStats = document.getElementById("display-player")
+    let viewport = window.pageYOffset;
+    //player stats apper at the top of the viewport
+    playerStats.style.padding = viewport;
+
+    /*** CONFIGUREING INSERTION OF STATS ***/
+    let tr = document.getElementsByTagName("TR");
+    let statCardName = document.getElementById("stat-card-name");
+
+    let statName = [
+      "G",
+      "GP",
+      "G",
+      "A",
+      "P",
+      "PM",
+      "PPG",
+      "PPA",
+      "S",
+      "Blk",
+      "H",
+      "FW",
+    ];
+
+    /*** MATCHING SELECTED PLAYER TO DATABASE ***/
+    for (let i = 1; i < tr.length; i++) {
+      tr[i].onclick = function () {
+        playerStats.style.display = "block";
+        let trCollection = tr[i];
+        let trNodes = trCollection.childNodes;
+        // let pos = trNodes[2].innerText;
+        let name = trNodes[1].innerText;
+        // push player name and pos to h1
+        statCardName.innerText = name;
+
+        let table = document.getElementById("stat-card-table");
+        let header = table.createTHead();
+        let headerRow = header.insertRow(0);
+        let year1 = table.insertRow(1);
+
+        for (let i = 0; i < 12; i++) {
+          //inserting stat header
+          let x = headerRow.insertCell(i);
+          x.innerHTML = statName[i];
+          //inserting stats
+          let y = year1.insertCell(i);
+          //accessing stats from JSON using statName array
+          if (skatersJSON[name][statName[i]] === undefined) {
+            y.innerHTML = 0;
+          } else {
+            y.innerHTML = skatersJSON[name][statName[i]];
+          }
+        }
+      };
+    }
+  }
+
+  function closePlayerStats() {
+    //close player stats window
+    let playerStats = document.getElementById("display-player")
+    playerStats.style.display = "none";
+
+    //clear player data from table
+    let table = document.getElementById("stat-card-table");
+    table.deleteTHead();
+    for (let i = 0; i < table.length; i++) {
+      table.deleteRow(i)
+    }
+  }
+
+  /****************
+   *** COMPONANT ***
+   ****************/
   return (
     <div className="stats-page">
       <div className="grid-container">
         <Nav />
         <h1 className="page-title">Skaters</h1>
         <button
-          id="skaterButton"
-          className="statButton"
+          id="skater-button"
+          className="stat-button"
           type="submit"
-          onClick={clickHandler}
+          onClick={displayTable}
         >
           Get Draft Rankings
         </button>
@@ -167,7 +248,12 @@ function Skaters() {
           <p id="load-2">Calculating Score . . .</p>
           <p id="load-3">Ranking Players . . .</p>
         </div>
-        <table id="skaterTable"></table>
+        <table id="skater-table" className="main-table"></table>
+        <div id="display-player">
+          <span id="exit-button" onClick={closePlayerStats}></span>
+          <h1 id="stat-card-name"> </h1>
+          <table id="stat-card-table"></table>
+        </div>
       </div>
     </div>
   );

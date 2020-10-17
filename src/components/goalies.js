@@ -120,7 +120,7 @@ function Goalies() {
           <p id="load-2">Calculating Score . . .</p>
           <p id="load-3">Ranking Players . . .</p>
         </div>
-        <table id="goalieTable"></table>
+        <table id="goalieTable" className="main-table"></table>
       </div>
     </div>
   );

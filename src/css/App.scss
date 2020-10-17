@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo:wght@800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
 
 $white: #eeeeee;
 $neon: #f1fa3c;
@@ -58,6 +58,7 @@ $background: #020607;
   justify-self: center;
   line-height: 0.8em;
   font-family: "Exo", sans-serif;
+  user-select: none;
 }
 
 .main-tag {
@@ -67,8 +68,8 @@ $background: #020607;
   align-self: center;
   justify-self: center;
   font-family: "Rubik", sans-serif;
+  user-select: none;
 }
-
 
 #startButtonDiv {
   grid-column: 1 / -1;
@@ -110,7 +111,6 @@ $background: #020607;
   overflow-x: hidden;
 }
 
-
 .page-title {
   font-size: 4em;
   margin-top: 0;
@@ -120,9 +120,10 @@ $background: #020607;
   justify-self: center;
   line-height: 0.8em;
   font-family: "Exo", sans-serif;
+  user-select: none;
 }
 
-.statButton {
+.stat-button {
   grid-column: 1 / -1;
   grid-row: 1;
   justify-self: center;
@@ -130,7 +131,7 @@ $background: #020607;
   background-color: $neon;
   border: none;
   color: $black;
-  padding: .8em 2em;
+  padding: 0.8em 2em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -139,13 +140,13 @@ $background: #020607;
   opacity: 0;
 }
 
-.statButton:hover {
+.stat-button:hover {
   transform: scale(1.05);
   transition: 0.1s;
   cursor: pointer;
 }
 
-.statButton:active {
+.stat-button:active {
   transform: scale(1);
   transition: 0.0001s;
 }
@@ -161,6 +162,7 @@ $background: #020607;
   font-family: "Rubik", sans-serif;
   z-index: 5;
   text-align: center;
+  user-select: none;
 }
 
 .loading-anim > p {
@@ -168,13 +170,15 @@ $background: #020607;
   opacity: 0;
 }
 
-#skaterTable {
+#skater-table {
   grid-column: 1 / -1;
   grid-row-start: 2;
   justify-self: center;
   align-self: start;
   border-collapse: collapse;
   opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 2%;
 }
 
 #goalieTable {
@@ -184,31 +188,87 @@ $background: #020607;
   align-self: start;
   border-collapse: collapse;
   opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 2%;
 }
 
-
-th, td {
-  border-bottom: 2px solid $neon;
+#skater-table th,
+td {
+  border-bottom: 2px solid #f1fa3c;
   border-spacing: 5px;
   padding: 15px;
   text-align: left;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1.2em;
 }
 
-tr:hover {
-  background-color: $neon;
-  color: $black;
+#skater-table tr:hover {
+  background-color: #f1fa3c;
+  color: #000;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 751px) {
-  tr:hover {
-    transform: scale3d(1.2,1.2,1.2);
+  #skater-table tr:hover {
+    transform: scale3d(1.2, 1.2, 1.2);
     box-shadow: 0 0 4px #f8ff33;
   }
 }
 
-tr:first-child {
+#skater-table tr:first-child {
+  background-color: #f1fa3c;
+  color: #000;
+}
+
+/************************
+*** PLAYER STATS PAGE ***
+************************/
+#exit-button {
+  width: 35px;
+  display: flex;
+  padding: 15px 10px;
+  margin: 20px;
+  background-image: url("./../img/closeButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#exit-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  fill: red;
+}
+
+#display-player {
+  display: none;
+  position: fixed;
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 20;
+  font-family: "Exo", sans-serif;
+}
+
+#stat-card-table {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Rubik", sans-serif;
+  border-collapse: collapse;
+}
+
+
+
+#stat-card-table td {
+  background-color: transparent;
+  padding: 1.2em;
+  text-align: center;
+  border-bottom: 0.01px solid $neon;
+}
+
+#stat-card-table tr:first-child {
   background-color: $neon;
   color: $black;
 }
@@ -218,7 +278,6 @@ tr:first-child {
 ******************/
 
 @media only screen and (max-width: 750px) {
-
   .navButton {
     width: 45px;
     height: 45px;
@@ -242,14 +301,29 @@ tr:first-child {
     margin: 8% 3%;
   }
 
-  .statButton {
-    padding: .7em 1.5em;
+  .stat-button {
+    padding: 0.7em 1.5em;
   }
 
-  td {
+  .main-table td {
     font-size: 0.9em;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
   }
 
+  #exit-button {
+    margin-left: 5px;
+  }
+
+  #stat-card-table td {
+    font-size: 0.8em;
+    width: 100vw;
+    padding: 1.2em 0.1em;
+    border: 0.01px $neon;
+    border-style: none solid solid solid;
+  }
+
+  #stat-card-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
