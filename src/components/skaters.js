@@ -167,7 +167,7 @@ function Skaters() {
     let statCardName = document.getElementById("stat-card-name");
 
     let statName = [
-      "G",
+      "Pos",
       "GP",
       "G",
       "A",
