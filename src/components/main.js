@@ -13,17 +13,17 @@ function Main() {
           a draft assistant tool that ranks NHL players based on their fantasy
           league value
         </h2>
-        <div id="startButtonDiv">
-          <div id="goalieDiv">
+        <div id="start-button-div">
+          <div id="goalie-div">
             <Link to="/goalies">
-              <button className="startButton" type="submit">
+              <button className="start-button" type="submit">
                 Goalies
               </button>
             </Link>
           </div>
           <div id="skaterDiv">
             <Link to="/skaters">
-              <button className="startButton" type="submit">
+              <button className="start-button" type="submit">
                 Skaters
               </button>
             </Link>
