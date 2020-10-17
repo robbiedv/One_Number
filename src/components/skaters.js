@@ -152,13 +152,22 @@ function Skaters() {
   }
 
 
-/*********************
-*** DISPLAY PLAYER ***
-*********************/
+/***************************
+*** DISPLAY PLAYER STATS ***
+***************************/
   function displayPlayer() {
-  
+    /*** CONFIGUREING DISPLAY OF STATS ***/
+    let playerStats = document.getElementById("display-player")
+    let viewport = window.pageYOffset;
+    //player stats apper at the top of the viewport
+    playerStats.style.padding = viewport;
+
+    /*** CONFIGUREING INSERTION OF STATS ***/
+    let tr = document.getElementsByTagName("TR");
+    let statCardName = document.getElementById("stat-card-name");
+
     let statName = [
-      "Pos",
+      "G",
       "GP",
       "G",
       "A",
@@ -172,15 +181,15 @@ function Skaters() {
       "FW",
     ];
 
-    let tr = document.getElementsByTagName("TR");
-    let statCardName = document.getElementById("stat-card-name");
-
     /*** MATCHING SELECTED PLAYER TO DATABASE ***/
     for (let i = 1; i < tr.length; i++) {
       tr[i].onclick = function () {
-        let trColl = tr[i];
-        let trNodes = trColl.childNodes;
+        playerStats.style.display = "block";
+        let trCollection = tr[i];
+        let trNodes = trCollection.childNodes;
+        // let pos = trNodes[2].innerText;
         let name = trNodes[1].innerText;
+        // push player name and pos to h1
         statCardName.innerText = name;
 
         let table = document.getElementById("stat-card-table");
@@ -189,12 +198,12 @@ function Skaters() {
         let year1 = table.insertRow(1);
 
         for (let i = 0; i < 12; i++) {
-          //INSERTING STAT HEADERS
+          //inserting stat header
           let x = headerRow.insertCell(i);
           x.innerHTML = statName[i];
-          //INSERTING STATS
+          //inserting stats
           let y = year1.insertCell(i);
-          //ACCESSING STATS FROM JSON USING STATNAME ARRAY
+          //accessing stats from JSON using statName array
           if (skatersJSON[name][statName[i]] === undefined) {
             y.innerHTML = 0;
           } else {
@@ -202,6 +211,19 @@ function Skaters() {
           }
         }
       };
+    }
+  }
+
+  function closePlayerStats() {
+    //close player stats window
+    let playerStats = document.getElementById("display-player")
+    playerStats.style.display = "none";
+
+    //clear player data from table
+    let table = document.getElementById("stat-card-table");
+    table.deleteTHead();
+    for (let i = 0; i < table.length; i++) {
+      table.deleteRow(i)
     }
   }
 
@@ -228,6 +250,7 @@ function Skaters() {
         </div>
         <table id="skater-table" className="main-table"></table>
         <div id="display-player">
+          <span id="exit-button" onClick={closePlayerStats}></span>
           <h1 id="stat-card-name"> </h1>
           <table id="stat-card-table"></table>
         </div>

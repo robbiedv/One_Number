@@ -220,14 +220,33 @@ td {
   color: #000;
 }
 
+/************************
+*** PLAYER STATS PAGE ***
+************************/
+#exit-button {
+  width: 35px;
+  display: flex;
+  padding: 15px 10px;
+  margin: 20px;
+  background-image: url("./../img/closeButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#exit-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  fill: red;
+}
+
 #display-player {
-  // display: none;
-  position: sticky;
-  top: ;
+  display: none;
+  position: fixed;
   grid-column: 1 / -1;
   justify-self: center;
-  width: 80vw;
-  height: 40vh;
+  width: 100vw;
+  height: 100vh;
   background-color: #000;
   z-index: 20;
   font-family: "Exo", sans-serif;
@@ -237,15 +256,21 @@ td {
   display: flex;
   justify-content: space-around;
   font-family: "Rubik", sans-serif;
+  border-collapse: collapse;
 }
 
-#stat-card-table tr {
-}
+
 
 #stat-card-table td {
   background-color: transparent;
   padding: 1.2em;
   text-align: center;
+  border-bottom: 0.01px solid $neon;
+}
+
+#stat-card-table tr:first-child {
+  background-color: $neon;
+  color: $black;
 }
 
 /******************
@@ -280,9 +305,25 @@ td {
     padding: 0.7em 1.5em;
   }
 
-  td {
+  .main-table td {
     font-size: 0.9em;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
+  }
+
+  #exit-button {
+    margin-left: 5px;
+  }
+
+  #stat-card-table td {
+    font-size: 0.8em;
+    width: 100vw;
+    padding: 1.2em 0.1em;
+    border: 0.01px $neon;
+    border-style: none solid solid solid;
+  }
+
+  #stat-card-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
