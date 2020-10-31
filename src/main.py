@@ -4,20 +4,22 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-### POSITIONS TO SCRAPE
-skaterStats = ["player", "pos", "games_played", "goals", "assists", "points", "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
+# POSITIONS TO SCRAPE
+skaterStats = ["player", "pos", "games_played", "goals", "assists", "points",
+               "pen_min", "goals_pp", "assists_pp", "shots", "blocks", 	"hits", "faceoff_wins"]
 
-goalieStats = ["player", "starts_goalie", "wins_goalie", "goals_against", "saves", "save_pct", "shutouts"]
+goalieStats = ["player", "starts_goalie", "wins_goalie",
+               "goals_against", "saves", "save_pct", "shutouts"]
 
-### URLS FOR DATA SCRAPE
+# URLS FOR DATA SCRAPE
 skaterURL = "https://www.hockey-reference.com/leagues/NHL_2020_skaters.html"
 goalieURL = "https://www.hockey-reference.com/leagues/NHL_2020_goalies.html"
 
-### FILES TO WRITE TO
+# FILES TO WRITE TO
 skaterFile = open('./data/skater.txt', 'w')
 goalieFile = open('./data/goalie.txt', 'w')
 
-## LISTS FOR STORING SCRAPED DATA
+# LISTS FOR STORING SCRAPED DATA
 skaterData = []
 goalieData = []
 
@@ -26,20 +28,20 @@ goalieData = []
 # CREATE SKATERS DATABASE #
 ###########################
 
-def scrape (url, stats, data):
+def scrape(url, stats, data):
 
-	### BEAUTIFUL SOUP SETUP
-	response = requests.get(url)
-	content = BeautifulSoup(response.content, "html.parser")
+    # BEAUTIFUL SOUP SETUP
+    response = requests.get(url)
+    content = BeautifulSoup(response.content, "html.parser")
 
-	### TD ELEMENTS WITH A TAG OF 'DATA-STAT': LIST
-	scrapedData = content.find_all("td", {"data-stat": stats})
+    # TD ELEMENTS WITH A TAG OF 'DATA-STAT': LIST
+    scrapedData = content.find_all("td", {"data-stat": stats})
 
-	### LOOPING OVER DATA TO WRITE TO TXT FILE
-	for i in scrapedData:
-		# replacing spaces in name with underscore
-		# data.append(i.text.replace(" ", "_"))
-		data.append(i.text)
+    # LOOPING OVER DATA TO WRITE TO TXT FILE
+    for i in scrapedData:
+        # replacing spaces in name with underscore
+        # data.append(i.text.replace(" ", "_"))
+        data.append(i.text)
 
 
 ###########################
@@ -47,16 +49,16 @@ def scrape (url, stats, data):
 ###########################
 
 def dataToTxt(data, file):
-	for stat in data:
-		# inserting new line at every player name
-		if len(stat) > 4:
-			file.write("\n")
-			file.write(stat)
-			file.write(',')
-		else:
-			file.write(stat)
-			file.write(',')
-	file.close()
+    for stat in data:
+        # inserting new line at every player name
+        if len(stat) > 4:
+            file.write("\n")
+            file.write(stat)
+            file.write(',')
+        else:
+            file.write(stat)
+            file.write(',')
+    file.close()
 
 
 ##############################
@@ -65,98 +67,102 @@ def dataToTxt(data, file):
 
 def removeDups(test):
 
-	if (test == "goalie"):
-		outfile = open('./data/goalieDB.txt', "w")
-		infile = open('./data/goalie.txt', "r")
-		# set for checking against
-		namesSeen = set()
+    if (test == "goalie"):
+        outfile = open('./data/goalieDB.txt', "w")
+        infile = open('./data/goalie.txt', "r")
+        # set for checking against
+        namesSeen = set()
 
-		for line in infile:
-			name = list(line.strip().split(",", 8))[0]
-			if name not in namesSeen:
-				outfile.write(line)
-				namesSeen.add(name)
-		outfile.close()
+        for line in infile:
+            name = list(line.strip().split(",", 8))[0]
+            if name not in namesSeen:
+                outfile.write(line)
+                namesSeen.add(name)
+        outfile.close()
 
-	elif (test == "skater"):
-		outfile = open('./data/skaterDB.txt', "w")
-		infile = open('./data/skater.txt', "r")
-		# set for checking against
-		namesSeen = set()
+    elif (test == "skater"):
+        outfile = open('./data/skaterDB.txt', "w")
+        infile = open('./data/skater.txt', "r")
+        # set for checking against
+        namesSeen = set()
 
-		for line in infile:
-			name = list(line.strip().split(",", 14))[0]
-			if name not in namesSeen:
-				outfile.write(line)
-				namesSeen.add(name)
-		outfile.close()
+        for line in infile:
+            name = list(line.strip().split(",", 14))[0]
+            if name not in namesSeen:
+                outfile.write(line)
+                namesSeen.add(name)
+        outfile.close()
 
 
 ###############################
 # CONVERTING TEXT DOC TO JSON #
 ###############################
 
-skaterKeys = ['Pos','GP','G','A','P','PM','PPG','PPA','S','BLK','H','FW']
+skaterKeys = ['Pos', 'GP', 'G', 'A', 'P',
+              'PM', 'PPG', 'PPA', 'S', 'BLK', 'H', 'FW']
 goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV-PCT', 'SH']
+
 
 def dataToJSON(keys, test):
 
-	dict1 = {}
+    dict1 = {}
 
-	if (test == "skater"):
-		with open('./data/skaterDB.txt') as txtFile:
-			for line in txtFile:
-				name = list( line.strip().split(",", 14))[0]
-				stats = list(line.strip().split(",", 13))
+    if (test == "skater"):
+        with open('./data/skaterDB.txt') as txtFile:
+            for line in txtFile:
+                name = list(line.strip().split(",", 14))[0]
+                stats = list(line.strip().split(",", 13))
 
-				# removes entries with incomplete stats
-				if (len(stats) > 10):
-					i = 0
-					dict2 = {}
-					while i < len(keys):
-						# loops over keys list, assigns stat as value
-						dict2[keys[i]] = stats[i+1]
-						i = i + 1
-						# adds player name as key, all stats as value
-						dict1[name] = dict2
+                # removes entries with incomplete stats
+                if (len(stats) > 10):
+                    i = 0
+                    dict2 = {}
+                    while i < len(keys):
+                        # loops over keys list, assigns stat as value
+                        dict2[keys[i]] = stats[i + 1]
+                        i = i + 1
+                        # adds player name as key, all stats as value
+                        dict1[name] = dict2
 
-		outfile = open("./data/skaters.json", "w")
-		json.dump(dict1, outfile, indent = 4)
-		outfile.close()
+        outfile = open("./data/skaters.json", "w")
+        json.dump(dict1, outfile, indent=4)
+        outfile.close()
 
-	if (test == "goalie"):
-		with open('./data/goalieDB.txt') as txtFile:
-			for line in txtFile:
-				name = list( line.strip().split(",", 8))[0]
-				stats = list(line.strip().split(",", 7))
+    if (test == "goalie"):
+        with open('./data/goalieDB.txt') as txtFile:
+            for line in txtFile:
+                name = list(line.strip().split(",", 8))[0]
+                stats = list(line.strip().split(",", 7))
 
-				# removes entries with incomplete stats
-				if (len(stats) > 5):
-					i = 0
-					dict2 = {}
-					while i < len(keys):
-						# loops over keys list, assigns stat as value
-						dict2[keys[i]] = stats[i+1]
-						i = i + 1
-						# adds player name as key, all stats as value
-						dict1[name] = dict2
+                # removes entries with incomplete stats
+                if (len(stats) > 5):
+                    i = 0
+                    dict2 = {}
+                    while i < len(keys):
+                        # loops over keys list, assigns stat as value
+                        dict2[keys[i]] = stats[i + 1]
+                        i = i + 1
+                        # adds player name as key, all stats as value
+                        dict1[name] = dict2
 
-		out_file = open("./data/goalies.json", "w")
-		json.dump(dict1, out_file, indent = 4)
-		out_file.close()
+        out_file = open("./data/goalies.json", "w")
+        json.dump(dict1, out_file, indent=4)
+        out_file.close()
 
 
 def skaters():
-	scrape(skaterURL, skaterStats, skaterData)
-	dataToTxt(skaterData, skaterFile)
-	removeDups("skater")
-	dataToJSON(skaterKeys, "skater")
+    scrape(skaterURL, skaterStats, skaterData)
+    dataToTxt(skaterData, skaterFile)
+    removeDups("skater")
+    dataToJSON(skaterKeys, "skater")
+
 
 def goalies():
-	scrape(goalieURL, goalieStats, goalieData)
-	dataToTxt(goalieData, goalieFile)
-	removeDups("goalie")
-	dataToJSON(goalieKeys, "goalie")
+    scrape(goalieURL, goalieStats, goalieData)
+    dataToTxt(goalieData, goalieFile)
+    removeDups("goalie")
+    dataToJSON(goalieKeys, "goalie")
+
 
 goalies()
 skaters()
