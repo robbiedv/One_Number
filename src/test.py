@@ -1,6 +1,7 @@
 #! /bin/bash/python3
 
 import requests
+import json
 from bs4 import BeautifulSoup
 
 # POSITIONS TO SCRAPE
@@ -127,17 +128,77 @@ def removeDups(test):
                     namesSeen.add(name)
             outfile.close()
 
+###############################
+# CONVERTING TEXT DOC TO JSON #
+###############################
+
+
+skaterKeys = ['Pos', 'GP', 'G', 'A', 'P',
+              'PM', 'PPG', 'PPA', 'S', 'BLK', 'H', 'FW']
+goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV-PCT', 'SH']
+
+
+def dataToJSON(keys, test):
+    x = range(1, 6)
+    year = 0
+    for number in x:
+        year = year + 1
+        dict1 = {}
+        if (test == "skater"):
+            with open(f'./data/skaterDB{year}.txt') as txtFile:
+                for line in txtFile:
+                    name = list(line.strip().split(",", 14))[0]
+                    stats = list(line.strip().split(",", 13))
+
+                    # removes entries with incomplete stats
+                    if (len(stats) > 10):
+                        i = 0
+                        dict2 = {}
+                        while i < len(keys):
+                            # loops over keys list, assigns stat as value
+                            dict2[keys[i]] = stats[i + 1]
+                            i = i + 1
+                            # adds player name as key, all stats as value
+                            dict1[name] = dict2
+
+            outfile = open(f"./data/skaters{year}.json", "w")
+            json.dump(dict1, outfile, indent=4)
+            outfile.close()
+
+        if (test == "goalie"):
+            with open(f'./data/goalieDB{year}.txt') as txtFile:
+                for line in txtFile:
+                    name = list(line.strip().split(",", 8))[0]
+                    stats = list(line.strip().split(",", 7))
+
+                    # removes entries with incomplete stats
+                    if (len(stats) > 5):
+                        i = 0
+                        dict2 = {}
+                        while i < len(keys):
+                            # loops over keys list, assigns stat as value
+                            dict2[keys[i]] = stats[i + 1]
+                            i = i + 1
+                            # adds player name as key, all stats as value
+                            dict1[name] = dict2
+
+            out_file = open(f"./data/goalies{year}.json", "w")
+            json.dump(dict1, out_file, indent=4)
+            out_file.close()
+
 
 def skaters():
     scrape(skaterURL, skaterStats, skaterData)
     dataToTxt(skaterData, "skater")
     removeDups("skater")
+    dataToJSON(skaterKeys, "skater")
 
 
 def goalies():
     scrape(goalieURL, goalieStats, goalieData)
     dataToTxt(goalieData, "goalie")
     removeDups("goalie")
+    dataToJSON(goalieKeys, "goalie")
 
 
 # goalies()
