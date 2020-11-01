@@ -18,3 +18,26 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/react
+
+### CUSTOM ###
+skater1.txt
+skater2.txt
+skater3.txt
+skater4.txt
+skater5.txt
+skaterDB1.txt
+skaterDB2.txt
+skaterDB3.txt
+skaterDB4.txt
+skaterDB5.txt
+
+goalie1.text
+goalie2.text
+goalie3.text
+goalie4.text
+goalie5.text
+goalieDB1.txt
+goalieDB2.txt
+goalieDB3.txt
+goalieDB4.txt
+goalieDB5.txt
