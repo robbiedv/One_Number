@@ -1,6 +1,6 @@
 import React from "react";
 import "./../css/App.scss";
-import skatersJSON from "./../data/skaters.json";
+import yearOne  from "./../data/skaters1.json";
 import "./../css/animations.scss";
 import Nav from "./nav.js";
 
@@ -19,20 +19,20 @@ function Skaters() {
     ***/
 
   function addSkaterStats() {
-    for (let player in skatersJSON) {
+    for (let player in yearOne) {
       let stats = 0;
-      stats += parseInt(skatersJSON[player].GP);
-      stats += parseInt(skatersJSON[player].G);
-      stats += parseInt(skatersJSON[player].A);
-      stats += parseInt(skatersJSON[player].P);
-      stats += parseInt(skatersJSON[player].PM * 0.5);
-      stats += parseInt(skatersJSON[player].PPG * 5);
-      stats += parseInt(skatersJSON[player].PPA * 5);
-      stats += parseInt(skatersJSON[player].S);
-      stats += parseInt(skatersJSON[player].BLK);
-      stats += parseInt(skatersJSON[player].H * 0.5);
-      stats += parseInt(skatersJSON[player].FW) * 0.05;
-      let pos = skatersJSON[player].Pos;
+      stats += parseInt(yearOne[player].GP);
+      stats += parseInt(yearOne[player].G);
+      stats += parseInt(yearOne[player].A);
+      stats += parseInt(yearOne[player].P);
+      stats += parseInt(yearOne[player].PM * 0.5);
+      stats += parseInt(yearOne[player].PPG * 5);
+      stats += parseInt(yearOne[player].PPA * 5);
+      stats += parseInt(yearOne[player].S);
+      stats += parseInt(yearOne[player].BLK);
+      stats += parseInt(yearOne[player].H * 0.5);
+      stats += parseInt(yearOne[player].FW) * 0.05;
+      let pos = yearOne[player].Pos;
       stats = Math.round(stats / 10);
       if (pos === "RW") {
         rightW.push([player, pos, stats]);
@@ -183,6 +183,7 @@ function Skaters() {
 
     /*** MATCHING SELECTED PLAYER TO DATABASE ***/
     for (let i = 1; i < tr.length; i++) {
+      // when a player in the main player is clicked
       tr[i].onclick = function () {
         playerStats.style.display = "block";
         let trCollection = tr[i];
@@ -204,10 +205,10 @@ function Skaters() {
           //inserting stats
           let y = year1.insertCell(i);
           //accessing stats from JSON using statName array
-          if (skatersJSON[name][statName[i]] === undefined) {
+          if (yearOne[name][statName[i]] === undefined) {
             y.innerHTML = 0;
           } else {
-            y.innerHTML = skatersJSON[name][statName[i]];
+            y.innerHTML = yearOne[name][statName[i]];
           }
         }
       };

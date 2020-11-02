@@ -135,7 +135,7 @@ def removeDups(test):
 
 skaterKeys = ['Pos', 'GP', 'G', 'A', 'P',
               'PM', 'PPG', 'PPA', 'S', 'BLK', 'H', 'FW']
-goalieKeys = ['GS', 'W', 'GA', 'SV', 'SV-PCT', 'SH']
+goalieKeys = ['GS', 'W', 'GA', 'SV', 'SVPCT', 'SH']
 
 
 def dataToJSON(keys, test):
@@ -201,5 +201,5 @@ def goalies():
     dataToJSON(goalieKeys, "goalie")
 
 
-# goalies()
+goalies()
 skaters()
