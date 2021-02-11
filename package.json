@@ -17,8 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-aws": "rm -rf dist && parcel build src/index.html",
-    "build-prod": "react-scripts build && rimraf build/static/**/*.map",
+    // "build-aws": "rm -rf dist && parcel build src/index.html",
+    // "build-prod": "react-scripts build && rimraf build/static/**/*.map",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

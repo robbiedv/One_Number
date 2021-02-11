@@ -15,8 +15,8 @@ import Nav from "./nav.js";
 function Goalies() {
 
   /***
-    Adding each goalies stats together and pushing
-    to new array based on player position
+    Adding each goalies stats together 
+    and pushing to new array
     ***/
   const fiveYearStats = [yearOne, yearTwo, yearThree, yearFour, yearFive]
 
@@ -62,13 +62,13 @@ function Goalies() {
   const fiveYearRank = [goalieRank1, goalieRank2, goalieRank3, goalieRank4, goalieRank5]
 
   function totalingStats() {
+    let seenPlayer = []
     for (let year = 0; year < fiveYearRank.length; year ++) {
       for (let player in fiveYearRank[year]) {
-        
+        console.log(fiveYearRank[year][player])
+        }
       }
-
     }
-  }
 
   /***
     Callback function for sorting players based
